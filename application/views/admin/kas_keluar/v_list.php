@@ -7,8 +7,12 @@
             </li>   
         </ul>
         <div class="clearfix"></div>
+        </div>
+            <div class="alert alert-primary alert-dismissible">
+                <h5>
+                <i class="fa fa-info"></i> Total Pengeluaran Masjid</h5>
+                <h2><?= "Rp " . number_format($total_kas_keluar->kas_keluar,2,',','.'); ?></h2>
             </div>
-            
             <a href="<?= base_url('kas_keluar/add'); ?>"class="btn btn-primary"> <i class="fa fa-plus"></i>Tambah Data</a>
             <div class="x_content">
                 <div class="row">

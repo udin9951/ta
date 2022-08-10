@@ -15,6 +15,7 @@ class Kas_keluar extends CI_Controller {
             $data = array(
                 'title' => 'Data Kas Keluar', 
                 'kas_keluar' => $this->M_kas_keluar->lists(),
+                'total_kas_keluar' => $this->M_kas_keluar->sumKas(),
                 'isi'  => 'admin/kas_keluar/v_list'
             );
             $this->load->view('admin/layout/v_wrapper', $data, FALSE);
@@ -41,6 +42,7 @@ class Kas_keluar extends CI_Controller {
                                 'tgl_kas'    => $this->input->post('tgl_kas'),
                                 'uraian_kas'    => $this->input->post('uraian_kas'),
                                 'kas_keluar'    => $this->input->post('kas_keluar'),
+                                'jenis_kas'     => "Keluar",
                                 'id_user'          =>  $this->session->userdata('id_user')
                             );
                         $this->M_kas_keluar->add($data);
