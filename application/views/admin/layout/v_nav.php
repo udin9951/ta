@@ -38,6 +38,7 @@
                       <li><a href="<?= base_url('rekap')?>">Rekap Kas Masjid</a></li>  
                     </ul>
                   </li> 
+                  <li><a href="<?= base_url('user')?>"><i class="fa fa-users"></i>Users<span class="label label-success pull-right"></span></a></li>
                 </ul>
               </div>
 
@@ -60,7 +61,6 @@
                       <!-- <img src="<?= base_url() ?>template/back-end/production/images/img.jpg" alt="">John Doe -->
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item"  href="javascript:;"> Profile</a>
                     <!--   <a class="dropdown-item"  href="<?= base_url('login/logout')?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a> -->
                       <a class="dropdown-item"  href="<?= base_url('home')?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                     </div>

@@ -1,18 +1,18 @@
   <!-- Footer Section Begin -->
-    <footer class="footer set-bg" data-setbg="<?= base_url() ?>template/front-end/img/wall.jpg">
+    <footer class="footer" style="background: #008000;">
         <div class="container text-center">
             <div class="row">
-                <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> by <a href="" target="_blank">TI Poliban 2019</a></p> 
+                <p class="text-white">Copyright &copy; <script>document.write(new Date().getFullYear());</script> by <a href="" target="_blank">TI Poliban 2019</a></p> 
              
              <div class="col-8">
 
              </div>
              
               <div class="col">
-              <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a> 
+              <a href="#"><i class="fa fa-facebook text-white"></i></a>
+                                <a href="#"><i class="fa fa-twitter text-white"></i></a>
+                                <a href="#"><i class="fa fa-linkedin text-white"></i></a>
+                                <a href="#"><i class="fa fa-youtube-play text-white"></i></a> 
              </div>
             </div>
         </div>
