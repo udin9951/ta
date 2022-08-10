@@ -24,7 +24,7 @@ class Pengurus extends CI_Controller {
         public function add()    
         {         
             
-        $this->form_validation->set_rules('nama_pengurus','Nama Pengurus', 'required');
+        $this->form_validation->set_rules('nama_pengurus','Nama Pengurus', 'required|is_unique[pengurus.nama_pengurus]');
        
             if ($this->form_validation->run() == TRUE) {
                $config['upload_path'] = './gambar/';
@@ -72,7 +72,7 @@ class Pengurus extends CI_Controller {
     
         public function edit($id_pengurus)
         {
-            $this->form_validation->set_rules('nama_pengurus','Nama Pengurus', 'required');
+            $this->form_validation->set_rules('nama_pengurus','Nama Pengurus', 'required|is_unique[pengurus.nama_pengurus]');
 
             
             if ($this->form_validation->run() == TRUE) {

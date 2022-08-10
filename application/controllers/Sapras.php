@@ -26,7 +26,7 @@ public function __construct()
          public function add()
         {         
             
-        $this->form_validation->set_rules('nama_sapras','Nama Sarana & Prasarana', 'required');
+        $this->form_validation->set_rules('nama_sapras','Nama Sarana & Prasarana', 'required|is_unique[sapras.nama_sapras]');
         $this->form_validation->set_rules('deskripsi_sapras','Deskripsi Sarana & Prasarana', 'required');
        
             if ($this->form_validation->run() == TRUE) {
@@ -76,7 +76,7 @@ public function __construct()
         
          public function edit($id_sapras)
         {
-            $this->form_validation->set_rules('nama_sapras','Nama Sarana & Prasarana', 'required');
+            $this->form_validation->set_rules('nama_sapras','Nama Sarana & Prasarana', 'required|is_unique[sapras.nama_sapras]');
             $this->form_validation->set_rules('deskripsi_sapras','Deskripsi Sarana & Prasarana', 'required');
             // $this->form_validation->set_rules('foto_sapras','Foto Sarana & Prasarana', 'required');
 
