@@ -10,12 +10,9 @@
             </div>
 
             <div class="alert alert-success alert-dismissible">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <h5>
         <i class="fa fa-info"></i> Total Pemasukan Masjid</h5>
-        <h2> <!-- <?= $kas_masuk?><?php  echo $kas_masuk ?> -->
-          <!-- <td><?php echo $kas_masuk->kas_masuk;?></td>  --> 
-        Rp 4.050.000,00 </h2>
+        <h2><?= "Rp " . number_format($total_kas_masuk->kas_masuk,2,',','.'); ?></h2>
 
 </div>
 

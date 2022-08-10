@@ -15,8 +15,10 @@ class Kas_masuk extends CI_Controller {
             $data = array(
                 'title' => 'Data Kas Masuk', 
                 'kas_masuk' => $this->M_kas_masuk->lists(),
+                'total_kas_masuk' => $this->M_kas_masuk->sumKas(),
                 'isi'  => 'admin/kas_masuk/v_list'
             );
+
             $this->load->view('admin/layout/v_wrapper', $data, FALSE);
 
         }

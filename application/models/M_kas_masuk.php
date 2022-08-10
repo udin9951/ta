@@ -11,8 +11,18 @@ class M_kas_masuk extends CI_Model {
     $this->db->select('*');
         $this->db->from('kas');    
         $this->db->join('user', 'user.id_user = kas.id_user', 'left');
+        $this->db->where('jenis_kas', 'Masuk');
         $this->db->order_by('id_kas', 'DESC');
         return $this->db->get()->result();
+    }
+
+    public function sumKas() 
+    {
+
+    $this->db->select_sum('kas_masuk');
+        $this->db->from('kas');    
+        $this->db->where('jenis_kas', 'Masuk');
+        return $this->db->get()->row();
     }
 
     public function detail($id_kas) 
