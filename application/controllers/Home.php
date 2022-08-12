@@ -146,9 +146,40 @@ class Home extends CI_Controller {
 
 	public function rekap()
 	{
+		$filter_start = $this->input->post('filter-start');
+		$filter_end = $this->input->post('filter-end');
+		$type = $this->input->post('type');
+
+		$filter_start = !empty($filter_start) ? $filter_start : "";
+		$filter_end = !empty($filter_end) ? $filter_end : "";
+		$type = !empty($type) ? $type : "";
+
+		if(!empty($filter_start) && !empty($filter_end))
+		{
+			if($filter_start > $filter_end )
+			{
+				$this->session->set_flashdata('error', 'Start Date Tidak Boleh Lebih dari End Date');
+				redirect('home/rekap');
+			}
+		}
+
+		$total_kas = 0;
+		if(empty($type))
+		{
+			$kas_masuk =  $this->m_home->sumKasMasuk($filter_start, $filter_end ,'Masuk');
+			$kas_keluar = $this->m_home->sumKasKeluar($filter_start, $filter_end ,'Keluar');
+
+			$total_kas = $kas_masuk->kas_masuk - $kas_keluar->kas_keluar;
+		}
 		$data = array(
 			'title' => 'Rekap Kas Masjid',
-			'rekap' => $this->m_home->rekap(),
+			'start' => $filter_start,
+			'end' => $filter_end,
+			'type' => $type,
+			'kas_masuk' => $this->m_home->sumKasMasuk($filter_start, $filter_end ,$type),
+			'kas_keluar' => $this->m_home->sumKasKeluar($filter_start, $filter_end ,$type),
+			'total_kas' => $total_kas,
+			'rekap' => $this->m_home->rekap_kas($filter_start, $filter_end ,$type),
 			'isi'=> 'v_rekap' 
 			);
 		$this->load->view('layout/v_wrapper', $data, FALSE);

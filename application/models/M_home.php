@@ -88,13 +88,89 @@ class M_home extends CI_Model {
         return $this->db->get()->result();
     }        
 
-    public function rekap_kas()
+    public function rekap_kas($filter_start, $filter_end ,$type)
     {
         $this->db->select('*');
-        $this->db->from('salat');            
-        $this->db->order_by('id_salat', 'desc');
+        $this->db->from('kas');
+        if(!empty($filter_start))
+        {
+            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m') >= ", $filter_start);
+        }
+
+        if(!empty($filter_end))
+        {
+            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m') <= ", $filter_end);
+        }
+        if(!empty($type))
+        {
+            $this->db->where('jenis_kas', $type);
+        }
+        $this->db->order_by('id_kas', 'DESC');
         return $this->db->get()->result();
-    }  
+    }
+    
+    public function sumKasMasuk($filter_start, $filter_end ,$type) 
+    {
+
+    $this->db->select_sum('kas_masuk');
+        $this->db->from('kas');   
+        if(!empty($filter_start))
+        {
+            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m') >= ", $filter_start);
+        }
+
+        if(!empty($filter_end))
+        {
+            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m') <= ", $filter_end);
+        }
+        if(!empty($type))
+        {
+            $this->db->where('jenis_kas', $type);
+        } 
+        return $this->db->get()->row();
+    }
+
+    public function sumKasKeluar($filter_start, $filter_end ,$type) 
+    {
+
+    $this->db->select_sum('kas_keluar');
+        $this->db->from('kas');   
+        if(!empty($filter_start))
+        {
+            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m') >= ", $filter_start);
+        }
+
+        if(!empty($filter_end))
+        {
+            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m') <= ", $filter_end);
+        }
+        if(!empty($type))
+        {
+            $this->db->where('jenis_kas', $type);
+        } 
+        return $this->db->get()->row();
+    }
+
+    public function sumKas($filter_start, $filter_end ,$type) 
+    {
+
+    $this->db->select_sum('kas_keluar');
+        $this->db->from('kas');   
+        if(!empty($filter_start))
+        {
+            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m') >= ", $filter_start);
+        }
+
+        if(!empty($filter_end))
+        {
+            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m') <= ", $filter_end);
+        }
+        if(!empty($type))
+        {
+            $this->db->where('jenis_kas', $type);
+        } 
+        return $this->db->get()->row();
+    }
     
     //memunculkan berita deg pging
     public function berita($limit,$start)
