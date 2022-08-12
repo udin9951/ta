@@ -46,21 +46,34 @@ class M_home extends CI_Model {
     }
     
 
-    public function pengajian()
+    public function pengajian($hari)
     {
         $this->db->select('*');
-        $this->db->from('pengajian');
-         $this->db->join('penceramah', 'penceramah.id_penceramah = pengajian.id_penceramah','left');                  
-        $this->db->order_by('id_pengajian', 'desc');
+        $this->db->from('pengajian a');
+         $this->db->join('penceramah b', 'b.id_penceramah = a.id_penceramah','left');     
+         if(!empty($hari))
+         {
+             $this->db->where("a.hari_pengajian", $hari);
+         }             
+        $this->db->order_by('a.id_pengajian', 'desc');
         return $this->db->get()->result();
     }
 
-    public function soljum()
+    public function soljum($filter_start,$filter_end)
     {
         $this->db->select('*');
         $this->db->from('soljum');   
-         $this->db->join('imam', 'imam.id_imam = soljum.id_imam','left');               
-        $this->db->order_by('id_soljum', 'desc');
+        $this->db->join('imam', 'imam.id_imam = soljum.id_imam','left'); 
+        if(!empty($filter_start))
+        {
+            $this->db->where("DATE_FORMAT(soljum.tgl_soljum,'%Y-%m') >= ", $filter_start);
+        }
+
+        if(!empty($filter_end))
+        {
+            $this->db->where("DATE_FORMAT(soljum.tgl_soljum,'%Y-%m') <= ", $filter_end);
+        }              
+        $this->db->order_by('soljum.id_soljum', 'desc');
         return $this->db->get()->result();
     }
 

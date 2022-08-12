@@ -11,6 +11,29 @@
                         </div>
 								<span class="b-line l-left line-h"></span>
 							</div>			
+							<hr>
+								<?php echo form_open_multipart('home/pengajian'); ?>
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="type">Pilih Hari</label>
+												<br>
+												<select class="form-control" name="hari" id="hari">
+													<option value="">Select All</option>
+													<option value="Senin" <?= $hari == "Senin" ? "Selected" : "" ?>>Senin</option>
+													<option value="Selasa" <?= $hari == "Selasa" ? "Selected" : "" ?>>Selasa</option>
+													<option value="Rabu" <?= $hari == "Rabu" ? "Selected" : "" ?>>Rabu</option>
+													<option value="Kamis" <?= $hari == "Kamis" ? "Selected" : "" ?>>Kamis</option>
+													<option value="Jumat" <?= $hari == "Jumat" ? "Selected" : "" ?>>Jumat</option>
+													<option value="Sabtu" <?= $hari == "Sabtu" ? "Selected" : "" ?>>Sabtu</option>
+													<option value="Minggu" <?= $hari == "Minggu" ? "Selected" : "" ?>>Minggu</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<button type="submit" class="btn btn-primary">Filter</button>
+								<?php echo form_close(); ?>
+							<hr>
 							<div class="col-lg-12">
 								<table class="table table-bordered">
 									<thead class="dark-bg">

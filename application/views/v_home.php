@@ -27,39 +27,14 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-       <!--  <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="hero__text">
-                        <h5>Selamat Datang Di Website Resmi Masjid Al-Barqah</h5>
-                         Tulisan di tengah menu utama wrna kuning bold
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-    <!-- </section> -->
-    <!-- Hero Section End -->
-
+      
     <!-- Home About Section Begin -->
     <section class="home-about">
         <div class="container">
             <div class="row">
-                <!-- <div class="col-lg-6">
-                    <div class="home__about__text">
-                        <div class="section-title">
-                            <h2>Selamat Datang Di Website Resmi Masjid Al-Barqah</h2>
-                        </div>
-                        <img src="<?= base_url() ?>template/front-end/img/home-about/sign.png" alt=""> logo masjidnya
-                    </div>
-                </div> -->
                 <div class="col-lg-6">
                     <div class="home__about__pic">
-                        <!-- <img src="<?= base_url() ?>template/front-end/img/home-about/home-about.png" alt=""> -->
                     </div>
-                   <!--  <div>
-                        <script type="text/javascript" src="https://www.muslimpro.com/muslimprowidget.js?cityid=1214520&language=id&timeformat=24" async></script>
-                    </div> -->
                 </div>
 
             </div>
@@ -68,26 +43,25 @@
     <!-- Home About Section End -->
 
     <!-- Services Section Begin -->
-    <section class="services spad">
+    <section class="services spad" style="margin :10px;">
         <div class="container">
-            <div class="section-title">
-                &nbsp
-                            <h2>Galeri Masjid Al-Barqah</h2>
-                        </div>
             <div class="row">
-                    <?php $no=1; foreach ($galeri as $key => $value) { ?>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="services__item">
-                        <img src="<?= base_url('sampul/'. $value->foto_galeri) ?>" width="150px">
-                        <h4><?= $value->judul_galeri?> </h4>
-                        <p><?= $value->deskripsi_galeri?></p>
-                        <p>
-                                <h4><span>Deskripsi</span> : <?= $value->deskripsi_galeri?> </h4>
+                <div class="col-md-10">
+                    <div class="container" text align="justify">
+                        <h3>Profil Masjid Al-Barqah</h3>&nbsp;
+							<p>Masjid Al-Barqah merupakan masjid yang berlokasi di Komplek Kayu Tangi II Rt. 15 Jl. H. Hasan Basri Kecamatan Banjarmasin Utara, 
+                                Kota Banjarmasin. Masjid ini terletak di dalam komplek yang berada dekat kawasan kampus dan sekolah. 
+                                Masjid ini pertama kali didirikan pada tahun 1980 di atas tanah seluas 700 meter persegi. Pada awal pembangunan, 
+                                bangunan ini bernama Musholla Al-Barqah, lalu pada sekitar tahun 1984 bangunan ini berganti status menjadi masjid yang bernama 
+                                Masjid Al-Barqah hingaa saat ini. Dari awal dibangun hingga saat ini, masjid ini telah mengalami dua kali renovasi. <a href="<?= base_url('home/profil')  ?>"><b>Selengkapnya</b></a>
                             </p>
                     </div>
                 </div>
-
-                    <?php   }?>
+                <div class="col-md-2">
+                    <div class="contact__form">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d16861.5992887304!2d114.58411808292901!3d-3.300443490524068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423a723347adb%3A0xe0bf7cbd2ddea589!2sMesjid%20Al%20-%20Barqah!5e0!3m2!1sid!2sid!4v1659377590709!5m2!1sid!2sid" width="500" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

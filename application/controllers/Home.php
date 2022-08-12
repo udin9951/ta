@@ -87,9 +87,14 @@ class Home extends CI_Controller {
 
 	public function pengajian()
 	{
+		$hari = $this->input->post('hari');
+		
+		$hari = !empty($hari) ? $hari : "";
+
 		$data = array(
 			'title' => 'Jadwal Pengajian',
-			'pengajian' => $this->m_home->pengajian(),
+			'hari' => $hari,
+			'pengajian' => $this->m_home->pengajian($hari),
 			'isi'=> 'v_pengajian' 
 			);
 		$this->load->view('layout/v_wrapper', $data, FALSE);
@@ -97,9 +102,26 @@ class Home extends CI_Controller {
 
 	public function soljum()
 	{
+		$filter_start = $this->input->post('filter-start');
+		$filter_end = $this->input->post('filter-end');
+
+		$filter_start = !empty($filter_start) ? $filter_start : "";
+		$filter_end = !empty($filter_end) ? $filter_end : "";
+
+		if(!empty($filter_start) && !empty($filter_end))
+		{
+			if($filter_start > $filter_end )
+			{
+				$this->session->set_flashdata('error', 'Start Date Tidak Boleh Lebih dari End Date');
+				redirect('home/soljum');
+			}
+		}
+
 		$data = array(
 			'title' => 'Jadwal Khotib Salat Jumat',
-			'soljum' => $this->m_home->soljum(),
+			'start' => $filter_start,
+			'end'	=> $filter_end,
+			'soljum' => $this->m_home->soljum($filter_start,$filter_end),
 			'isi'=> 'v_soljum' 
 			);
 		$this->load->view('layout/v_wrapper', $data, FALSE);
