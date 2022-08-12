@@ -27,6 +27,11 @@
     <script src="<?= base_url() ?>template/front-end/js/jquery.slicknav.js"></script>
     <script src="<?= base_url() ?>template/front-end/js/owl.carousel.min.js"></script>
     <script src="<?= base_url() ?>template/front-end/js/main.js"></script>
+    <script src="<?= base_url() ?>template/front-end/js/gallery.min.js"></script>
+    <script>
+        JavaScriptGallery.enableExtraButtons();
+        JavaScriptGallery.initGallery();
+    </script>
     <!-- <script src="<?= base_url() ?>template/muslimpro/muslimprowidget.js"></script> -->
 </body>
 </body>

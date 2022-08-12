@@ -220,7 +220,7 @@ class M_home extends CI_Model {
         $this->db->from('berita');  
         $this->db->join('user', 'user.id_user = berita.id_user', 'left');       
         $this->db->order_by('id_berita', 'desc');
-        $this->db->limit(3);
+
         return $this->db->get()->result();
     }
     public function slider_berita()

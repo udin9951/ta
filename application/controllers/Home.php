@@ -213,7 +213,7 @@ class Home extends CI_Controller {
 		$this->load->library('pagination');
 		$config['base_url'] = base_url('home/berita');
 		$config['total_rows'] = count($this->m_home->total_berita());
-		$config['per_page'] = 4;
+		$config['per_page'] = 6;
 		$config['url_segmen'] = 3;	
 		
 		/////
@@ -225,7 +225,7 @@ class Home extends CI_Controller {
 		$config['last_link'] = 'Last';
 		$config['next_link'] = 'Next';
 		$config['prev_link'] = 'Prev';
-		$config['full_tag_open'] = '<div class="pagination__number blog__pagination"><ul class="pagination">"';
+		$config['full_tag_open'] = '<div class="pagination__number blog__pagination border border-dark"><ul class="pagination">';
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '</li>';
 		$config['cur_tag_open'] = '<li class="active"><a>';

@@ -53,7 +53,9 @@
                                 Kota Banjarmasin. Masjid ini terletak di dalam komplek yang berada dekat kawasan kampus dan sekolah. 
                                 Masjid ini pertama kali didirikan pada tahun 1980 di atas tanah seluas 700 meter persegi. Pada awal pembangunan, 
                                 bangunan ini bernama Musholla Al-Barqah, lalu pada sekitar tahun 1984 bangunan ini berganti status menjadi masjid yang bernama 
-                                Masjid Al-Barqah hingaa saat ini. Dari awal dibangun hingga saat ini, masjid ini telah mengalami dua kali renovasi. <a href="<?= base_url('home/profil')  ?>"><b>Selengkapnya</b></a>
+                                Masjid Al-Barqah hingaa saat ini. Dari awal dibangun hingga saat ini, masjid ini telah mengalami dua kali renovasi. 
+                                <br>
+                                <a href="<?= base_url('home/profil')  ?>"><b>Selengkapnya...</b></a>
                             </p>
                     </div>
                 </div>

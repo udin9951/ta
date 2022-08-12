@@ -13,12 +13,14 @@
             </div>
             <div class="row">
 
-                    <?php $no=1; foreach ($pengurus as $key => $value) { ?>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="services__item">
-                        <img src="<?= base_url('sampul/'. $value->foto_pengurus) ?>" width="150px">
-                        <h4><?= $value->nama_pengurus?> </h4>
-                        <p><?= $value->jabatan_pengurus?></p>
+                <?php $no=1; foreach ($pengurus as $key => $value) { ?>
+                <div class="col-6 col-md-3">
+                    <div class="services__item card p2">
+                        <img class="w-100" src="<?= file_exists(FCPATH.'/gambar/'. $value->foto_pengurus) ? base_url('gambar/'. $value->foto_pengurus) : "https://via.placeholder.com/200x200.png/001177?text=$value->nama_pengurus" ?>" style="height: 150px !important;object-fit:cover">
+                        <div class="card-body">
+                        <h5 class="card-title"><?= $value->nama_pengurus?> </h5>
+                        <p class="card-text"><?= ucfirst($value->jabatan_pengurus)?></p>
+                        </div>
                     </div>
                 </div>
                 

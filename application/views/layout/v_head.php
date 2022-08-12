@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>template/front-end/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="<?= base_url() ?>template/front-end/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="<?= base_url() ?>template/front-end/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="<?= base_url() ?>template/front-end/css/gallery.min.css" type="text/css">
     <link rel="stylesheet" href="<?= base_url() ?>template/front-end/css/style.css" type="text/css">
 </head>
 
