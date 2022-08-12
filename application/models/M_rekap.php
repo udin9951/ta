@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_rekap extends CI_Model {
 
-    public function lists($filter, $type) 
+    public function lists($filter = NULL, $type = NULL) 
     {
 
     $this->db->select('*');

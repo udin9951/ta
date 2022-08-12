@@ -1,5 +1,9 @@
 <?php
 
+require_once APPPATH . 'third_party/Spout/Autoloader/autoload.php';
+use Box\Spout\Writer\WriterFactory;
+use Box\Spout\Common\Type;
+ 
 class User extends CI_Controller {
 
 	
@@ -7,13 +11,14 @@ class User extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('m_user');
+		$this->load->library('Pdf');
 	}
 	
     public function index()
     {
 		$data = array(
 			'title' => 'Data User',
-			'user' => $this->m_user->lists(),
+			'user' => $this->m_user->lists()->result(),
 			'isi'=> 'admin/user/v_list' 
 			);
         $this->load->view('admin/layout/v_wrapper', $data, FALSE);
@@ -150,6 +155,107 @@ class User extends CI_Controller {
 		$this->session->set_flashdata('pesan', 'Data Berhasil Dihapus');
 			redirect('user');
 	}
+
+	public function cetak()
+	{
+		error_reporting(0); // AGAR ERROR MASALAH VERSI PHP TIDAK MUNCUL
+        $pdf = new FPDF('P', 'mm','A4');
+        $pdf->AddPage();
+		$pdf->Image('./icon/logo_.png',10,10,70,25);
+		$pdf->Cell(50);
+		$pdf->SetFont('Times','B','20');
+		$pdf->Cell(0,5,'Pengurus Masjid Al-Barqah',0,1,'C');
+		$pdf->Cell(50);
+		$pdf->Cell(0,4,'',0,1,'C');
+		$pdf->Cell(50);
+		$pdf->Cell(0,5,'Komplek Kayu Tangi II',0,1,'C');
+		$pdf->Cell(50);
+		$pdf->Cell(0,4,'',0,1,'C');
+		$pdf->Cell(50);
+		$pdf->SetFont('Times','B','20');
+		$pdf->Cell(0,5,'Banjarmasin',0,1,'C');
+		$pdf->Cell(50);
+		$pdf->Cell(0,4,'',0,1,'C');
+		$pdf->SetLineWidth(1);		
+		$pdf->Line(10,36,200,36);
+		$pdf->SetLineWidth(0);				
+		$pdf->Line(10,37,200,37);
+		$pdf->SetFont('Arial','B',10);
+		$pdf->Cell(0,5,'Data User',0,1,'C');
+		$pdf->Ln(2);
+        $pdf->Cell(10,6,'No',1,0,'C');
+        $pdf->Cell(50,6,'Nama User',1,0,'C');
+        $pdf->Cell(70,6,'Username',1,0,'C');
+        $pdf->Cell(20,6,'Level',1,0,'C');
+        $pdf->Cell(40,6,'Foto',1,1,'C');
+        $pdf->SetFont('Arial','',10);
+        $user = $this->m_user->lists()->result();
+        $no=0;
+        foreach ($user as $data){
+            $no++;
+            $pdf->Cell(10,6,$no,1,0, 'C');
+            $pdf->Cell(50,6,$data->nama_user,1,0);
+            $pdf->Cell(70,6,$data->username,1,0);
+            $pdf->Cell(20,6,$data->level,1,0);
+            $pdf->Cell(40,6,$data->foto_user,1,1);
+        }
+        $pdf->Output();
+	}
+
+	public function export()
+    {
+
+		$export = $this->m_user->lists()->result();
+
+		$file_path = "Data User.xls";
+		$writer = WriterFactory::create(Type::XLSX);
+		$writer->openToBrowser($file_path);
+		//silahkan sobat sesuaikan dengan data yang ingin sobat tampilkan
+
+		$label = ['LAPORAN Data User'];
+		$spasi1 = [''];
+		$spasi2 = [''];
+		$spasi3 = [''];
+		$header = [
+			'No',
+			'Nama',
+			'Username',
+			'Level',
+			'Foto',
+		];
+
+
+		$writer->addRow($label);
+		$writer->addRow($spasi1);
+		$writer->addRow($spasi2);
+		$writer->addRow($spasi3);
+		$writer->addRow($header);
+
+		$data   = array(); //siapkan variabel array untuk menampung data
+		$no     = 1;
+
+		foreach ($export as $ex) {
+
+
+			// masukkan data dari database ke variabel array
+			// silahkan sobat sesuaikan dengan nama field pada tabel database
+			$stok = array(
+			    $no++,
+			    $ex->nama_user,
+			    $ex->username,
+			    $ex->level,
+			    $ex->foto_user,
+			);
+
+			array_push($data, $stok);
+		}
+
+		$writer->addRows($data); // tambahkan row untuk data anggota
+
+		$writer->close(); //tutup spout writer
+
+
+    }
 	
 }
 

@@ -17,8 +17,29 @@
 </div>
 
     </form>
-            
+            <?php
+                $urlExport = base_url('kas_masuk/export');  
+                if(!empty($filter))
+                {
+                    $urlExport = base_url('kas_masuk/export/'.$filter);
+                }
+
+                $urlCetak = base_url('kas_masuk/cetak');  
+                if(!empty($filter))
+                {
+                    $urlCetak = base_url('kas_masuk/cetak/'.$filter);
+                }
+
+                $urlPrint = base_url('kas_masuk/print');  
+                if(!empty($filter))
+                {
+                    $urlPrint = base_url('kas_masuk/print/'.$filter);
+                }
+            ?>
             <a href="<?= base_url('kas_masuk/add'); ?>"class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah</a>
+            <a href="<?= $urlExport ?>"class="btn btn-success"  target="_BLANK"> <i class="fa-solid fa-file-excel"></i>Export Excel</a>
+            <a href="<?= $urlCetak ?>"class="btn btn-warning"  target="_BLANK"> <i class="fa fa-file"></i>Export PDF</a>
+            <a href="<?= $urlPrint ?>"class="btn btn-danger" target="_BLANK"> <i class="fa fa-print"></i>Print</a>
             <div class="x_content">
                 <div class="row">
                     <div class="col-sm-12">
@@ -32,7 +53,21 @@
                             echo '</div>';
                         }
                         ?>
-                        <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+
+                        <hr>
+                        <?php echo form_open_multipart('kas_masuk/index'); ?>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="date">Filter By Date</label>
+                                        <input class="form-control" type="month" name="filter" id="date-filter" value="<?= !empty($filter) ? $filter : "" ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                        <?php echo form_close(); ?>
+                        <hr>
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                 <th>No</th>

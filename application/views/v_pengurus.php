@@ -8,11 +8,9 @@
                             <h2>Susunan Kepengurusan</h2>
                         </div>
                     </div>
-                   
                 </div>
             </div>
-            <div class="row">
-
+            <div class="row d-flex Gallery">
                 <?php $no=1; foreach ($pengurus as $key => $value) { ?>
                 <div class="col-6 col-md-3">
                     <div class="services__item card p2">

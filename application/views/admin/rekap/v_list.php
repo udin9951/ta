@@ -48,7 +48,31 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Filter</button>
-                        <?php echo form_close(); ?>
+                        <?php 
+                        
+                        $urlExport = base_url('rekap/export');  
+                        if(!empty($filter))
+                        {
+                            $urlExport = base_url('rekap/export/'.$filter);
+                        }
+        
+                        $urlCetak = base_url('rekap/cetak');  
+                        if(!empty($filter))
+                        {
+                            $urlCetak = base_url('rekap/cetak/'.$filter);
+                        }
+                        
+                        $urlPrint = base_url('rekap/print');  
+                        if(!empty($filter))
+                        {
+                            $urlPrint = base_url('rekap/print/'.$filter);
+                        }
+
+                        echo form_close(); ?>
+                        <hr>
+                            <a href="<?= $urlExport ?>"class="btn btn-success" target="_BLANK"> <i class="fa-solid fa-file-excel"></i>Export Excel</a>
+                            <a href="<?= $urlCetak ?>"class="btn btn-warning"  target="_BLANK"> <i class="fa fa-file"></i>Export PDF</a>
+                            <a href="<?= $urlPrint ?>"class="btn btn-danger" target="_BLANK"> <i class="fa fa-print"></i>Print</a>
                         <hr>
                     <div class="card-box table-responsive">
                         <?php
@@ -60,7 +84,7 @@
                             echo '</div>';
                         }
                         ?>
-                        <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                 <th>No</th>

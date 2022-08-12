@@ -55,6 +55,10 @@
     
     <script>
 	initSample();
+
+  $(document).ready(function() {
+    $('#example').DataTable();
+} );
 </script>
    
   </body>
