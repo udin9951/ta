@@ -25,7 +25,7 @@ class M_home extends CI_Model {
     {
         $this->db->select('*');
         $this->db->from('pengurus');            
-        $this->db->order_by('id_pengurus', 'desc');
+        $this->db->order_by('no_urut', 'asc');
         return $this->db->get()->result();
     }
 
@@ -55,7 +55,7 @@ class M_home extends CI_Model {
          {
              $this->db->where("a.hari_pengajian", $hari);
          }             
-        $this->db->order_by('a.id_pengajian', 'desc');
+        $this->db->order_by('a.tgl_pengajian', 'desc');
         return $this->db->get()->result();
     }
 
@@ -66,14 +66,21 @@ class M_home extends CI_Model {
         $this->db->join('imam', 'imam.id_imam = soljum.id_imam','left'); 
         if(!empty($filter_start))
         {
-            $this->db->where("DATE_FORMAT(soljum.tgl_soljum,'%Y-%m') >= ", $filter_start);
+            if(!empty($filter_end))
+            {
+                $this->db->where("DATE_FORMAT(soljum.tgl_soljum,'%Y-%m') >= ", $filter_start);
+            }
+            else
+            {
+                $this->db->where("DATE_FORMAT(soljum.tgl_soljum,'%Y-%m') ", $filter_start);
+            }
         }
 
         if(!empty($filter_end))
         {
             $this->db->where("DATE_FORMAT(soljum.tgl_soljum,'%Y-%m') <= ", $filter_end);
         }              
-        $this->db->order_by('soljum.id_soljum', 'desc');
+        $this->db->order_by('soljum.tgl_soljum', 'asc');
         return $this->db->get()->result();
     }
 
@@ -96,8 +103,8 @@ class M_home extends CI_Model {
     public function kas_keluar()
     {
         $this->db->select('*');
-        $this->db->from('salat');            
-        $this->db->order_by('id_salat', 'desc');
+        $this->db->from('kas');            
+        $this->db->order_by('id_kas', 'desc');
         return $this->db->get()->result();
     }        
 
@@ -107,18 +114,18 @@ class M_home extends CI_Model {
         $this->db->from('kas');
         if(!empty($filter_start))
         {
-            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m') >= ", $filter_start);
+            $this->db->where("tgl_kas >= ", $filter_start);
         }
 
         if(!empty($filter_end))
         {
-            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m') <= ", $filter_end);
+            $this->db->where("tgl_kas <= ", $filter_end);
         }
         if(!empty($type))
         {
             $this->db->where('jenis_kas', $type);
         }
-        $this->db->order_by('id_kas', 'DESC');
+        $this->db->order_by('tgl_kas', 'DESC');
         return $this->db->get()->result();
     }
     
@@ -129,12 +136,12 @@ class M_home extends CI_Model {
         $this->db->from('kas');   
         if(!empty($filter_start))
         {
-            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m') >= ", $filter_start);
+            $this->db->where("tgl_kas >= ", $filter_start);
         }
 
         if(!empty($filter_end))
         {
-            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m') <= ", $filter_end);
+            $this->db->where("tgl_kas <= ", $filter_end);
         }
         if(!empty($type))
         {
@@ -150,12 +157,12 @@ class M_home extends CI_Model {
         $this->db->from('kas');   
         if(!empty($filter_start))
         {
-            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m') >= ", $filter_start);
+            $this->db->where("tgl_kas >= ", $filter_start);
         }
 
         if(!empty($filter_end))
         {
-            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m') <= ", $filter_end);
+            $this->db->where("tgl_kas <= ", $filter_end);
         }
         if(!empty($type))
         {
@@ -171,12 +178,12 @@ class M_home extends CI_Model {
         $this->db->from('kas');   
         if(!empty($filter_start))
         {
-            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m') >= ", $filter_start);
+            $this->db->where("tgl_kas >= ", $filter_start);
         }
 
         if(!empty($filter_end))
         {
-            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m') <= ", $filter_end);
+            $this->db->where("tgl_kas <= ", $filter_end);
         }
         if(!empty($type))
         {

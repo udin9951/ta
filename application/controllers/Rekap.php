@@ -19,18 +19,21 @@ class rekap extends CI_Controller {
     public function index()
     {
         $filter = $this->input->post('filter');
+        $end = $this->input->post('end');
         $type = $this->input->post('type');
 
         $filter = !empty($filter) ? $filter : "";
+        $end = !empty($end) ? $end : "";
         $type = !empty($type) ? $type : "";
 
         $data = array(
             'title' => 'Data Rekap Kas Masjid', 
             'filter' => $filter,
             'type'  => $type,
-            'rekap' => $this->M_rekap->lists($filter, $type),
-            'total_kas_masuk' => $this->M_kas_masuk->sumKas($filter),
-            'total_kas_keluar' => $this->M_kas_keluar->sumKas($filter),
+            'end'  => $end,
+            'rekap' => $this->M_rekap->lists($filter, $end, $type),
+            'total_kas_masuk' => $this->M_kas_masuk->sumKas($filter, $end),
+            'total_kas_keluar' => $this->M_kas_keluar->sumKas($filter, $end),
             'postback' => base_url('rekap/index'),
             'isi'  => 'admin/rekap/v_list'
         );
@@ -63,13 +66,14 @@ class rekap extends CI_Controller {
         $pdf->SetLineWidth(0);				
         $pdf->Line(10,37,200,37);
         $pdf->SetFont('Arial','B',10);
-        $pdf->Cell(0,5,'Data Kas Keluar',0,1,'C');
+        $pdf->Cell(0,10,'Laporan Penerimaan dan Pengeluaran Dana',0,1,'C');
+        $pdf->Cell(0,0,'Masjid Al-Barqah',0,1,'C');
         $pdf->Ln(2);
         $pdf->Cell(10,6,'No',1,0,'C');
         $pdf->Cell(50,6,'Tanggal',1,0,'C');
         $pdf->Cell(70,6,'Uraian',1,0,'C');
-        $pdf->Cell(20,6,'Kas Masuk',1,0,'C');
-        $pdf->Cell(20,6,'Kas Keluar',1,1,'C');
+        $pdf->Cell(30,6,'Kas Masuk',1,0,'C');
+        $pdf->Cell(30,6,'Kas Keluar',1,1,'C');
         $pdf->SetFont('Arial','',10);
         $user =$this->M_rekap->lists($filter);
         $no=0;
@@ -78,20 +82,20 @@ class rekap extends CI_Controller {
         foreach ($user as $data){
             $total_masuk += $data->kas_masuk;
             $total_keluar += $data->kas_keluar;
-
+            $datetime = DateTime::createFromFormat('Y-m-d', $data->tgl_kas);
             $no++;
             $pdf->Cell(10,6,$no,1,0, 'C');
-            $pdf->Cell(50,6,$data->tgl_kas,1,0);
+            $pdf->Cell(50,6,$datetime->format('d-m-Y'),1,0);
             $pdf->Cell(70,6,$data->uraian_kas,1,0);
-            $pdf->Cell(20,6,$data->kas_masuk,1,0);
-            $pdf->Cell(20,6,$data->kas_keluar,1,1);
+            $pdf->Cell(30,6,$data->kas_masuk,1,0);
+            $pdf->Cell(30,6,$data->kas_keluar,1,1);
         }
         $pdf->Cell(130,6,'Total Kas Masuk',1,0,'C');
-        $pdf->Cell(40,6,$total_masuk,1,1,'C');
+        $pdf->Cell(60,6,$total_masuk,1,1,'C');
         $pdf->Cell(130,6,'Total Kas Keluar',1,0,'C');
-        $pdf->Cell(40,6,$total_keluar,1,1,'C');
-        $pdf->Cell(130,6,'Total Kas Masjid',1,0,'C');
-        $pdf->Cell(40,6,$total_masuk - $total_keluar,1,1,'C');
+        $pdf->Cell(60,6,$total_keluar,1,1,'C');
+        $pdf->Cell(130,6,'Total Saldo Akhir Kas Masjid',1,0,'C');
+        $pdf->Cell(60,6,$total_masuk - $total_keluar,1,1,'C');
 
         $pdf->Output();
     }
@@ -163,7 +167,7 @@ class rekap extends CI_Controller {
 
             $total = array(
                 '',
-                'Total Saldo Kas Masjid',
+                'Total Saldo Akhir Kas Masjid',
                 '',
                 "Rp " . number_format(($total_masuk - $total_keluar),2,',','.'),
                 '',
@@ -211,7 +215,7 @@ class rekap extends CI_Controller {
             </tr>";
 
             $data .= "<tr>
-                    <td colspan='3'><center>Total Kas Masjid</center></td>
+                    <td colspan='3'><center>Total Saldo Akhir Kas Masjid</center></td>
                     <td colspan='2'> Rp".number_format(($total_masuk - $total_keluar),2,',','.')."</td>
             </tr>";
 
@@ -273,13 +277,13 @@ class rekap extends CI_Controller {
 						<th width='100px'>
 							<center>Tanggal Kas</center>
 						</th>		
-						<th width='100px'>
+						<th width='210px'>
 							<center>Uraian</center>
 						</th>		
-						<th width='100px'>
+						<th width='150px'>
 							<center>Kas Masuk</center>
 						</th>		
-						<th width='100px'>
+						<th width='150px'>
 							<center>Kas Keluar</center>
 						</th>		
 					</tr>

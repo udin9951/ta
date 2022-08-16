@@ -29,7 +29,7 @@
 
               <?php
                 }
-                if($this->session->userdata('level') != 3)
+                if(!in_array($this->session->userdata('level'), [3,4]))
                 {
 
               ?>
@@ -43,9 +43,8 @@
 
               <?php
                 }
-                if(in_array($this->session->userdata('level'), [1,4] ))
+                if(!in_array($this->session->userdata('level'), [2] ))
                 {
-
               ?>
               <li><a><i class="fa fa-book"></i>Kas Masjid<span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">

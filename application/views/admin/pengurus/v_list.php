@@ -8,8 +8,19 @@
         </ul>
         <div class="clearfix"></div>
             </div>
-            
+
+            <?php
+                $urlExport = base_url('pengurus/export');  
+
+                $urlCetak = base_url('pengurus/cetak');  
+
+                $urlPrint = base_url('pengurus/print');  
+            ?>
             <a href="<?= base_url('pengurus/add'); ?>"class="btn btn-primary"> <i class="fa fa-plus"></i>Tambah</a>
+            <a href="<?= $urlExport ?>"class="btn btn-success"  target="_BLANK"> <i class="fa-solid fa-file-excel"></i>Export Excel</a>
+            <a href="<?= $urlCetak ?>"class="btn btn-warning"  target="_BLANK"> <i class="fa fa-file"></i>Export PDF</a>
+            <a href="<?= $urlPrint ?>"class="btn btn-danger" target="_BLANK"> <i class="fa fa-print"></i>Print</a>
+
             <div class="x_content">
                 <div class="row">
                     <div class="col-sm-12">

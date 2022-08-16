@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_kas_keluar extends CI_Model {
 
-    public function lists($filter = NULL) 
+    public function lists($filter = NULL, $end = NULL) 
     {
 
     $this->db->select('*');
@@ -13,21 +13,29 @@ class M_kas_keluar extends CI_Model {
         $this->db->join('user', 'user.id_user = kas.id_user', 'left');
         if(!empty($filter))
         {
-            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m')", $filter);
+            $this->db->where("tgl_kas >=", $filter);
+        }
+        if(!empty($end))
+        {
+            $this->db->where("tgl_kas <=", $end);
         }
         $this->db->where('jenis_kas', 'Keluar');
 		$this->db->order_by('id_kas', 'DESC');
         return $this->db->get()->result();
     }
 
-    public function sumKas($filter = NULL) 
+    public function sumKas($filter = NULL, $end = NULL) 
     {
 
     $this->db->select_sum('kas_keluar');
         $this->db->from('kas');    
         if(!empty($filter))
         {
-            $this->db->where("DATE_FORMAT(tgl_kas,'%Y-%m')", $filter);
+            $this->db->where("tgl_kas >=", $filter);
+        }
+        if(!empty($end))
+        {
+            $this->db->where("tgl_kas <=", $end);
         }
         $this->db->where('jenis_kas', 'Keluar');
         return $this->db->get()->row();

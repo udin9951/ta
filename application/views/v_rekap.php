@@ -1,33 +1,5 @@
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-
-    <div class="carousel-item active">
-
-      <img src="<?php echo base_url('template/front-end/img/photo.jpg') ?>" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="<?php echo base_url('template/front-end/img/1.jpg') ?>" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="<?php echo base_url('template/front-end/img/11.jpg') ?>" class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-       <!--  <div class="container">
+    <!--  <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="hero__text">
@@ -87,24 +59,28 @@
                     echo '</div>';
                 }
                 ?>
+                <h3>
+                    <center>Laporan Penerimaan dan Pengeluaran Dana<br>
+                    Masjid Al-Barqah</center>
+                </h3>
                 <hr>
                     <?php echo form_open_multipart('home/rekap'); ?>
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="date">Start Date</label>
-                                    <input class="form-control" type="month" name="filter-start" id="date-filter" value="<?= !empty($start) ? $start : "" ?>">
+                                    <label for="date">Tanggal Mulai</label>
+                                    <input class="form-control" type="date" name="filter-start" id="date-filter" value="<?= !empty($start) ? $start : "" ?>">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="date">End Date</label>
-                                    <input class="form-control" type="month" name="filter-end" id="date-filter" value="<?= !empty($end) ? $end : "" ?>">
+                                    <label for="date">Tanggal Selesai</label>
+                                    <input class="form-control" type="date" name="filter-end" id="date-filter" value="<?= !empty($end) ? $end : "" ?>">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="type">End Date</label>
+                                    <label for="type">Jenis</label>
                                     <br>
                                     <select class="form-control" name="type" id="type">
                                         <option value="">Select All</option>
@@ -124,15 +100,17 @@
                         <th>Tanggal</th>
                         <th>Uraian</th>
                         <th>Jenis Kas</th>
-                        <th>Amount</th>
+                        <th>Jumlah</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php $no=1; foreach ($rekap as $key => $value) { ?>
+                    <?php $no=1; foreach ($rekap as $key => $value) { 
+                        	$datetime = DateTime::createFromFormat('Y-m-d', $value->tgl_kas);
+                        ?>
                     
                     <tr>
                         <td><?= $no++; ?></td>
-                        <td><?= $value->tgl_kas?></td>
+                        <td><?= $datetime->format('d-m-Y')?></td>
                         <td><?= $value->uraian_kas?></td>
                         <td><?= $value->jenis_kas?></td>
                         <?php

@@ -18,14 +18,17 @@ class Kas_keluar extends CI_Controller {
         public function index()
         {
             $filter = $this->input->post('filter');
+            $end = $this->input->post('end');
 
             $filter = !empty($filter) ? $filter : "";
+            $end = !empty($end) ? $end : "";
 
             $data = array(
                 'title' => 'Data Kas Keluar', 
                 'filter' => $filter,
-                'kas_keluar' => $this->M_kas_keluar->lists($filter),
-                'total_kas_keluar' => $this->M_kas_keluar->sumKas(),
+                'end' => $end,
+                'kas_keluar' => $this->M_kas_keluar->lists($filter, $end),
+                'total_kas_keluar' => $this->M_kas_keluar->sumKas($filter, $end),
                 'isi'  => 'admin/kas_keluar/v_list'
             );
             $this->load->view('admin/layout/v_wrapper', $data, FALSE);
@@ -129,19 +132,18 @@ class Kas_keluar extends CI_Controller {
         $pdf->Ln(2);
         $pdf->Cell(10,6,'No',1,0,'C');
         $pdf->Cell(50,6,'Tanggal',1,0,'C');
-        $pdf->Cell(70,6,'Uraian',1,0,'C');
-        $pdf->Cell(20,6,'Kas Keluar',1,0,'C');
-        $pdf->Cell(40,6,'User',1,1,'C');
+        $pdf->Cell(90,6,'Uraian',1,0,'C');
+        $pdf->Cell(40,6,'Kas Keluar',1,1,'C');
         $pdf->SetFont('Arial','',10);
         $user = $this->M_kas_keluar->lists($filter);
         $no=0;
         foreach ($user as $data){
+            $datetime = DateTime::createFromFormat('Y-m-d', $data->tgl_kas);
             $no++;
             $pdf->Cell(10,6,$no,1,0, 'C');
-            $pdf->Cell(50,6,$data->tgl_kas,1,0);
-            $pdf->Cell(70,6,$data->uraian_kas,1,0);
-            $pdf->Cell(20,6,$data->kas_keluar,1,0);
-            $pdf->Cell(40,6,$data->nama_user,1,1);
+            $pdf->Cell(50,6,$datetime->format('d-m-Y'),1,0);
+            $pdf->Cell(90,6,$data->uraian_kas,1,0);
+            $pdf->Cell(40,6,$data->kas_keluar,1,1);
         }
         $pdf->Output();
     }
@@ -164,7 +166,6 @@ class Kas_keluar extends CI_Controller {
 			'Tanggal',
 			'Uraian',
 			'Jumlah Pengeluaran',
-			'User',
 		];
 
 
@@ -182,12 +183,12 @@ class Kas_keluar extends CI_Controller {
 
 			// masukkan data dari database ke variabel array
 			// silahkan sobat sesuaikan dengan nama field pada tabel database
+            $datetime = DateTime::createFromFormat('Y-m-d', $ex->tgl_kas);
 			$kas = array(
 			    $no++,
-			    $ex->tgl_kas,
+			    $datetime->format('d-m-Y'),
 			    $ex->uraian_kas,
 			    $ex->kas_keluar,
-			    $ex->nama_user,
 			);
 
 			array_push($data, $kas);
@@ -210,7 +211,6 @@ class Kas_keluar extends CI_Controller {
                     <td>".$value->tgl_kas."</td>
                     <td>".$value->uraian_kas."</td>
                     <td>".$value->kas_keluar."</td>
-                    <td>".$value->nama_user."</td>
             </tr>
             ";
         }
@@ -272,14 +272,11 @@ class Kas_keluar extends CI_Controller {
                     <th width='100px'>
                         <center>Tanggal Kas</center>
                     </th>		
-                    <th width='100px'>
+                    <th width='320px'>
                         <center>Uraian</center>
                     </th>		
-                    <th width='100px'>
+                    <th width='200px'>
                         <center>Kas keluar</center>
-                    </th>		
-                    <th width='100px'>
-                        <center>User</center>
                     </th>		
                 </tr>
                 $data

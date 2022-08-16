@@ -47,13 +47,15 @@
 										</tr>
 									</thead>
 									<tbody>
-										<?php $no=1; foreach ($pengajian as $key => $value) { ?>
+										<?php $no=1; foreach ($pengajian as $key => $value) { 
+											$datetime = DateTime::createFromFormat('Y-m-d', $value->tgl_pengajian);
+										?>
 											
 									
 										<tr>
 											<td class="text-center"> <?= $no++ ?> </td>
 											<td><?= $value->hari_pengajian?> </td>
-											<td><?= $value->tgl_pengajian?> </td>
+											<td><?= $datetime->format('d-m-Y')?> </td>
 											<td><?= $value->jam_pengajian?> </td>
 											<td><?= $value->nama_penceramah?> </td>
 											<td><?= $value->tema_pengajian?> </td>

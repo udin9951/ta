@@ -43,12 +43,12 @@
     <!-- Home About Section End -->
 
     <!-- Services Section Begin -->
-    <section class="services spad" style="margin :10px;">
+    <section class="services spad" style="margin :10px;margin-top : 20px;">
         <div class="container">
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <div class="container" text align="justify">
-                        <h3>Profil Masjid Al-Barqah</h3>&nbsp;
+                        <h2>Profil Masjid Al-Barqah</h2>&nbsp;
 							<p>Masjid Al-Barqah merupakan masjid yang berlokasi di Komplek Kayu Tangi II Rt. 15 Jl. H. Hasan Basri Kecamatan Banjarmasin Utara, 
                                 Kota Banjarmasin. Masjid ini terletak di dalam komplek yang berada dekat kawasan kampus dan sekolah. 
                                 Masjid ini pertama kali didirikan pada tahun 1980 di atas tanah seluas 700 meter persegi. Pada awal pembangunan, 
@@ -59,9 +59,10 @@
                             </p>
                     </div>
                 </div>
+                <div class="col-md-1"></div>
                 <div class="col-md-2">
                     <div class="contact__form">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d16861.5992887304!2d114.58411808292901!3d-3.300443490524068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423a723347adb%3A0xe0bf7cbd2ddea589!2sMesjid%20Al%20-%20Barqah!5e0!3m2!1sid!2sid!4v1659377590709!5m2!1sid!2sid" width="500" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d16861.5992887304!2d114.58411808292901!3d-3.300443490524068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423a723347adb%3A0xe0bf7cbd2ddea589!2sMesjid%20Al%20-%20Barqah!5e0!3m2!1sid!2sid!4v1659377590709!5m2!1sid!2sid" width="500" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>

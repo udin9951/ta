@@ -51,11 +51,26 @@ class User extends CI_Controller {
                     $config ['source_image']	= './gambar/'.$upload_data['uploads']['file_name'];
                     $this->load->library('image_lib', $config);
                     }
+					
+					if($this->input->post('level') == 1){
+						$nama_level = 'Admin';
+					}
+					else if($this->input->post('level') == 2){
+						$nama_level = "User";
+					}
+					else if($this->input->post('level') == 3){
+						$nama_level = "Sekertaris";
+					}
+					else if($this->input->post('level') == 4){
+						$nama_level = "Bendahara";
+					}
+
                     $data = array(
                             'nama_user' 		=> $this->input->post('nama_user'),							
                             'username' 		    => $this->input->post('username'),							
                             'password' 	    	=> $this->input->post('password'),							
                             'level' 	    	=> $this->input->post('level'),							
+                            'nama_level' 	    => $nama_level,							
                             'foto_user' 	    => $upload_data['uploads']['file_name'],
                     );
                     $this->m_user->add($data);
@@ -103,12 +118,26 @@ class User extends CI_Controller {
 							 unlink('./gambar/'.$user->foto_user);
 						 }
 						 //end menghapus photo lama
-             		$data = array(
+						 if($this->input->post('level') == 1){
+							$nama_level = 'Super Admin';
+						}
+						else if($this->input->post('level') == 2){
+							$nama_level = "Admin";
+						}
+						else if($this->input->post('level') == 3){
+							$nama_level = "Sekertaris";
+						}
+						else if($this->input->post('level') == 4){
+							$nama_level = "Bendahara";
+						}
+					
+						$data = array(
 							'id_user'			=> $id_user,
 							'nama_user' 		=> $this->input->post('nama_user'),							
                             'username' 		    => $this->input->post('username'),							
                             'password' 	    	=> !empty($this->input->post('password')) ? $this->input->post('password') : $user->password ,							
                             'level' 	    	=> $this->input->post('level'),							
+							'nama_level'		=> $nama_level,
                             'foto_user' 	    => $upload_data['uploads']['file_name'],
 					);
 
@@ -118,12 +147,26 @@ class User extends CI_Controller {
 				 }
                  $user=$this->m_user->detail($id_user);
 				 //edit tanpa ubah gambar
+
+				 if($this->input->post('level') == 1){
+					$nama_level = 'Super Admin';
+				}
+				else if($this->input->post('level') == 2){
+					$nama_level = "Admin";
+				}
+				else if($this->input->post('level') == 3){
+					$nama_level = "Sekertaris";
+				}
+				else if($this->input->post('level') == 4){
+					$nama_level = "Bendahara";
+				}
 				 $data = array(
 					'id_user'			=> $id_user,
 					'nama_user' 		=> $this->input->post('nama_user'),							
                     'username' 		    => $this->input->post('username'),							
                     'password' 	    	=> !empty($this->input->post('password')) ? $this->input->post('password') : $user->password ,							
                     'level' 	    	=> $this->input->post('level'),
+					'nama_level'		=> $nama_level,
 			);
 
 			$this->m_user->edit($data);
@@ -137,8 +180,6 @@ class User extends CI_Controller {
 			);
 			$this->load->view('admin/layout/v_wrapper', $data, FALSE);
 	}
-
-
 
 	public function delete($id_user)
 	{	
@@ -186,7 +227,7 @@ class User extends CI_Controller {
         $pdf->Cell(10,6,'No',1,0,'C');
         $pdf->Cell(50,6,'Nama User',1,0,'C');
         $pdf->Cell(70,6,'Username',1,0,'C');
-        $pdf->Cell(20,6,'Level',1,0,'C');
+        $pdf->Cell(25,6,'Level',1,0,'C');
         $pdf->Cell(40,6,'Foto',1,1,'C');
         $pdf->SetFont('Arial','',10);
         $user = $this->m_user->lists()->result();
@@ -196,7 +237,7 @@ class User extends CI_Controller {
             $pdf->Cell(10,6,$no,1,0, 'C');
             $pdf->Cell(50,6,$data->nama_user,1,0);
             $pdf->Cell(70,6,$data->username,1,0);
-            $pdf->Cell(20,6,$data->level,1,0);
+            $pdf->Cell(25,6,$data->nama_level,1,0);
             $pdf->Cell(40,6,$data->foto_user,1,1);
         }
         $pdf->Output();
@@ -243,7 +284,7 @@ class User extends CI_Controller {
 			    $no++,
 			    $ex->nama_user,
 			    $ex->username,
-			    $ex->level,
+			    $ex->nama_level,
 			    $ex->foto_user,
 			);
 

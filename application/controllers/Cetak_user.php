@@ -22,7 +22,7 @@ class Cetak_user extends CI_Controller {
 						<td>".$no++."</td>
 						<td>".$value->nama_user."</td>
 						<td>".$value->username."</td>
-						<td>".$value->level."</td>
+						<td>".$value->nama_level."</td>
 						<td>".$value->foto_user."</td>
 				</tr>
 				";

@@ -1,17 +1,17 @@
  <!-- About Section Begin -->
-    <section class="about spad">
+    <!-- <section class="about spad"> -->
         <div class="container">
-            <div class="about__content">
+            <div class="about__content" style="margin-bottom: 20px;">
                 <div class="row">
                     <div class="col-lg-5">
-                        <div class="section-title">
+                        <div class="section-title" style="margin-bottom: 0;">
                             <h2>Galeri</h2>
                         </div>
                     </div>
                    
                 </div>
             </div>
-            <div class="d-flex Gallery my-0">
+            <div class="d-flex Gallery mb-3">
 					<?php $no=1; foreach ($galeri as $key => $value) { ?>
                     <div class="col-6 col-md-4">
                         <div class="card">
@@ -29,5 +29,5 @@
 					<?php 	}?>
             </div>
         </div>
-    </section>
+    <!-- </section> -->
     <!-- About Section End -->

@@ -32,15 +32,21 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="date">Filter By Date</label>
-                                        <input class="form-control" type="month" name="filter" id="date-filter" value="<?= !empty($filter) ? $filter : "" ?>">
+                                        <label for="date">Tanggal Mulai</label>
+                                        <input class="form-control" type="date" name="filter" id="date-filter" value="<?= !empty($filter) ? $filter : "" ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="date">Type</label>
+                                        <label for="date">Tanggal Selesai</label>
+                                        <input class="form-control" type="date" name="end" id="date-filter" value="<?= !empty($end) ? $end : "" ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="date">Jenis</label>
                                         <select class="form-control" name="type" id="type">
-                                            <option value="">Choose One</option>
+                                            <option value="">Pilih</option>
                                             <option value="Masuk" <?= $type == "Masuk" ? "selected" : "" ?>>Masuk</option>
                                             <option value="Keluar" <?= $type == "Keluar" ? "selected" : "" ?>>Keluar</option>
                                         </select>
@@ -91,7 +97,7 @@
                                 <th>Tanggal</th>
                                 <th>Uraian</th>
                                 <th>Jenis Kas</th>
-                                <th>Amount</th>
+                                <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody>

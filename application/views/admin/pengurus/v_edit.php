@@ -22,14 +22,6 @@
                 <input type="text" value ="<?= $pengurus->nama_pengurus?>" name = "nama_pengurus" required="required" placeholder="Nama Pengurus" class="form-control ">
                 </div>
             </div>
-
-            <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align"> Jabatan Pengurus <span class="required"></span>
-                </label>
-                <div class="col-md-6 col-sm-6 ">
-                <input type="text" value ="<?= $pengurus->jabatan_pengurus?>" name = "jabatan_pengurus" required="required" placeholder="Jabatan Pengurus" class="form-control ">
-                </div>
-            </div>
             
             <div class="item form-group">
                 <label class="col-form-label col-md-3 col-sm-3 label-align"> Foto Pengurus <span class="required"></span>

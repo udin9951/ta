@@ -56,7 +56,13 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="date">Filter By Date</label>
-                                        <input class="form-control" type="month" name="filter" id="date-filter" value="<?= !empty($filter) ? $filter : "" ?>">
+                                        <input class="form-control" type="date" name="filter" id="date-filter" value="<?= !empty($filter) ? $filter : "" ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="date">Tanggal Selesai</label>
+                                        <input class="form-control" type="date" name="end" id="date-filter" value="<?= !empty($end) ? $end : "" ?>">
                                     </div>
                                 </div>
                             </div>

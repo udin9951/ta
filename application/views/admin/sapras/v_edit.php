@@ -46,7 +46,7 @@
                 </label>
                 <div class="col-md-6 col-sm-6 ">
                     <img src="<?= base_url('sampul/'.$sapras->foto_sapras) ?>" width="100px" alt="">
-                <input type="file" value ="<?= $sapras->foto_sapras?>" name = "foto_pengurus" required="required" placeholder="Foto Pengurus" class="form-control ">
+                <input type="file" value ="<?= $sapras->foto_sapras?>" name="foto_sapras" required="required" placeholder="Foto Pengurus" class="form-control ">
                 </div>
             </div>
 

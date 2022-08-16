@@ -15,6 +15,19 @@ class M_pengurus extends CI_Model {
         return $this->db->get()->result();
     }
 
+    public function last($no_urut = NULL) 
+    {
+
+    $this->db->select('*');
+        $this->db->from('pengurus');    
+        if(!empty($no_urut))
+        {
+            $this->db->where('no_urut', $no_urut);
+        }
+		$this->db->order_by('no_urut', 'DESC');
+        return $this->db->get()->row();
+    }
+
     public function detail($id_pengurus) 
     {
         $this->db->select('*');

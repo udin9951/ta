@@ -44,7 +44,7 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $value->nama_user ?></td>
                                 <td><?= $value->username ?></td>
-                                <td><?= $value->level ?></td>
+                                <td><?= $value->nama_level ?></td>
                                 <td> <img src="<?= base_url('gambar/'. $value->foto_user) ?>" width="150px"> </td>	
                                 <td>
                                 <a href="<?= base_url('user/edit/'.$value->id_user)?>" class ="btn btn-xs btn-primary"> <i class="fa fa-pencil"> </i></a>

@@ -1,18 +1,17 @@
   <!-- Footer Section Begin -->
     <footer class="footer" style="background: #008000;">
-        <div class="container text-center">
+        <div class="container-fluid">
             <div class="row">
-                <p class="text-white">Copyright &copy; <script>document.write(new Date().getFullYear());</script> by <a href="" target="_blank">TI Poliban 2019</a></p> 
-             
-             <div class="col-8">
-
-             </div>
-             
-              <div class="col">
-              <a href="#"><i class="fa fa-facebook text-white"></i></a>
-                                <a href="#"><i class="fa fa-twitter text-white"></i></a>
-                                <a href="#"><i class="fa fa-linkedin text-white"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play text-white"></i></a> 
+                <div class="col md-12">
+                    <div class="float-left">
+                        <p class="text-white">Copyright &copy; <script>document.write(new Date().getFullYear());</script> by <a href="" target="_blank">TI Poliban 2019</a></p>             
+                    </div>
+                    <div class="float-right">
+                        <a href="#"><i class="fa fa-facebook text-white"></i></a>
+                        <a href="#"><i class="fa fa-twitter text-white"></i></a>
+                        <a href="#"><i class="fa fa-linkedin text-white"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play text-white"></i></a> 
+                    </div>
              </div>
             </div>
         </div>
@@ -33,7 +32,6 @@
         JavaScriptGallery.initGallery();
     </script>
     <!-- <script src="<?= base_url() ?>template/muslimpro/muslimprowidget.js"></script> -->
-</body>
 </body>
 
 

@@ -19,9 +19,12 @@
                     echo ('<div class="alert alert-danger alert-dismissable ">
                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'.$error_upload.'</div>');
                    }
+
                    //validasi data tidak boleh kosong//
                    echo validation_errors('<div class="alert alert-danger alert-dismissable ">
                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>','</div>');
+
+                    echo $this->session->flashdata ('error');
 
                   echo form_open_multipart('pengurus/add'); ?>
 
@@ -37,7 +40,16 @@
                     <label class="col-form-label col-md-3 col-sm-3 label-align"> Jabatan Pengurus <span class="required"></span>
                     </label>
                     <div class="col-md-6 col-sm-6 ">
-                    <input type="text" name = "jabatan_pengurus" required="required" placeholder="Jabatan Pengurus" class="form-control ">
+                        <select class="form-control " name="jabatan_pengurus" id="jabatan_pengurus">
+                            <option value="">Pilih</option>
+                            <option value="Ketua">Ketua</option>
+                            <option value="Wakil Ketua">Wakil Ketua</option>
+                            <option value="Sekertaris">Sekeretaris</option>
+                            <option value="Wakil Sekertaris">Wakil Sekeretaris</option>
+                            <option value="Bendahara">Bendahara</option>
+                            <option value="Wakil Bendahara">Wakil Bendahara</option>
+                            <option value="Anggota">Anggota</option>
+                        </select>
                     </div>
                 </div>
                 <div class="item form-group">
