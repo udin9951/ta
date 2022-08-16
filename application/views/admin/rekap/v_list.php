@@ -101,11 +101,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php $no=1; foreach ($rekap as $key => $value) { ?>
+                            <?php $no=1; foreach ($rekap as $key => $value) { 
+                                $date = DateTime::createFromFormat('Y-m-d', $value->tgl_kas)->format('d-m-Y');
+                                ?>
                          
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $value->tgl_kas?></td>
+                                <td><?= $date?></td>
                                 <td><?= $value->uraian_kas?></td>
                                 <td><?= $value->jenis_kas?></td>
                                 <?php

@@ -39,13 +39,15 @@
                             </thead>
                             <tbody>
                                               
-                            <?php $no=1; foreach ($kegiatan as $key => $value) { ?>
+                            <?php $no=1; foreach ($kegiatan as $key => $value) { 
+                                $date = DateTime::createFromFormat('Y-m-d', $value->tgl_kegiatan)->format('d-m-Y');    
+                            ?>
                          
                             <tr>    
                                 <td><?= $no++; ?></td>
                                 <td><?= $value->nama_kegiatan?> </td>
                                 <td><?= $value->hari_kegiatan?> </td>
-                                <td><?= $value->tgl_kegiatan?> </td>
+                                <td><?= $date?> </td>
                                 <td><?= $value->jam_kegiatan?> </td>
                                 <td><?= $value->lokasi_kegiatan?> </td>
                                 <td><?= $value->deskripsi_kegiatan?> </td>

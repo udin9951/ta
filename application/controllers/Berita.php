@@ -38,6 +38,7 @@ class Berita extends CI_Controller {
 							'isi'=> 'admin/berita/v_add'  
 					);
 					$this->load->view('admin/layout/v_wrapper', $data, FALSE);
+					return;
              	}else{
              		$upload_data 				= array('uploads'=> $this ->upload ->data());
              		$config ['image_library'] 	= 'gd2';
@@ -80,6 +81,7 @@ class Berita extends CI_Controller {
                 $this->upload->initialize($config);
 
                 if ( ! $this->upload->do_upload('gambar_berita')){
+
                 	$data = array(
 					'title' => 'Edit Data berita',
 					'error_upload' => $this->upload->display_errors(),
@@ -87,6 +89,7 @@ class Berita extends CI_Controller {
 					'isi'=> 'admin/berita/v_edit' 
 					);
 					$this->load->view('admin/layout/v_wrapper', $data, FALSE);
+					return;
              	}else{
              			//edit dengan ubah gambar
 						 $upload_data = array('uploads'=> $this ->upload ->data());
@@ -96,9 +99,11 @@ class Berita extends CI_Controller {
 						 
 						 //menghapus file photo lama
 						 $berita=$this->m_berita->detail($id_berita);
+
 						 if ($berita->gambar_berita !="") {
 							 unlink('./gambar/'.$berita->gambar_berita);
 						 }
+
 						 //end menghapus photo lama
              		$data = array(
 							'id_berita'		    => $id_berita,

@@ -11,6 +11,12 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
+                <?php
+                     if (isset($error_upload)) {
+                        echo ('<div class="alert alert-danger alert-dismissable ">
+                           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'.$error_upload.'</div>');
+                       }
+                ?>
                 <br />                
               <?php 
               echo form_open_multipart('galeri/add'); ?>

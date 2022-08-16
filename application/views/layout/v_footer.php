@@ -1,6 +1,6 @@
   <!-- Footer Section Begin -->
     <footer class="footer" style="background: #008000;">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col md-12">
                     <div class="float-left">

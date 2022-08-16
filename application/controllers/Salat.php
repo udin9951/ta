@@ -69,7 +69,9 @@ class salat extends CI_Controller {
             $this->form_validation->set_rules('asar', 'Asar', 'required');
             $this->form_validation->set_rules('magrib', 'Magrib', 'required');
             $this->form_validation->set_rules('isya', 'Isya', 'required');    
+
             if ($this->form_validation->run() == FALSE) {
+
                 $data = array(
                     'title' => 'Edit Data Salat', 
                     'salat' => $this->M_salat->detail($id_salat),
@@ -77,25 +79,26 @@ class salat extends CI_Controller {
                 );
                 $this->load->view('admin/layout/v_wrapper', $data, FALSE);
 
-                    }
-                    else
-                    {
-                            $data = array(
-                                'tgl_salat'    => $this->input->post('tgl_salat'),
-                                'imsak'    => $this->input->post('imsak'),
-                                'subuh'    => $this->input->post('subuh'),
-                                'duha'    => $this->input->post('duha'),
-                                'zuhur'    => $this->input->post('zuhur'),
-                                'asar'    => $this->input->post('asar'),
-                                'magrib'    => $this->input->post('magrib'),
-                                'isya'    => $this->input->post('isya'),
-                                'id_user'          =>  $this->session->userdata('id_user')
-                                );
-                        $this->M_salat->edit($data);
-                        $this->session->set_flashdata('pesan', 'Data Berhasil Diedit');
-                        redirect('salat');
-                    }
                 }
+                else
+                {
+                        $data = array(
+                            'id_salat'    => $id_salat,
+                            'tgl_salat'    => $this->input->post('tgl_salat'),
+                            'imsak'    => $this->input->post('imsak'),
+                            'subuh'    => $this->input->post('subuh'),
+                            'duha'    => $this->input->post('duha'),
+                            'zuhur'    => $this->input->post('zuhur'),
+                            'asar'    => $this->input->post('asar'),
+                            'magrib'    => $this->input->post('magrib'),
+                            'isya'    => $this->input->post('isya'),
+                            'id_user'          =>  $this->session->userdata('id_user')
+                            );
+                    $this->M_salat->edit($data);
+                    $this->session->set_flashdata('pesan', 'Data Berhasil Diedit');
+                    redirect('salat');
+                }
+            }
 
         public function delete($id_salat)
         {

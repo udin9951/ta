@@ -15,7 +15,7 @@
             <div class="post-header">
               <h2><?= $berita->jdl_berita ?></h2>
             </div>
-            <div class="post-media"> <img src="<?= base_url('gambar/'.$berita->gambar_berita ) ?>" alt=""></div>
+            <div class="post-media" ><center><img src="<?= base_url('gambar/'.$berita->gambar_berita ) ?>" alt="" style="width :450px; !important;"></center> </div>
             <div class="post-entry">
               <p><?= $berita->isi_berita ?></p>
              

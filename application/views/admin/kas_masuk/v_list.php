@@ -85,11 +85,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php $no=1; foreach ($kas_masuk as $key => $value) { ?>
+                            <?php $no=1; foreach ($kas_masuk as $key => $value) {
+                                    $date = DateTime::createFromFormat('Y-m-d', $value->tgl_kas)->format('d-m-Y');
+                                ?>
                          
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $value->tgl_kas?></td>
+                                <td><?= $date?></td>
                                 <td><?= $value->uraian_kas?></td>
                                 <td><?= $value->kas_masuk?></td>
                                 <td><?= $value->nama_user?></td>

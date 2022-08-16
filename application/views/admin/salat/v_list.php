@@ -41,11 +41,13 @@
                             </thead>
                             <tbody>
                                               
-                            <?php $no=1; foreach ($salat as $key => $value) { ?>
+                            <?php $no=1; foreach ($salat as $key => $value) { 
+                                $date = DateTime::createFromFormat('Y-m-d', $value->tgl_salat)->format('d-m-Y');
+                                ?>
                          
                             <tr>    
                                 <td><?= $no++; ?></td>
-                                <td><?= $value->tgl_salat?> </td>
+                                <td><?= $date?> </td>
                                 <td><?= $value->imsak?> </td>
                                 <td><?= $value->subuh?> </td>
                                 <td><?= $value->duha?> </td>

@@ -44,6 +44,7 @@ class Galeri extends CI_Controller {
                                 'isi'=> 'admin/galeri/v_add'  
                             );
                             $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+                            return;
                     }
                     else
                     {
@@ -90,10 +91,12 @@ class Galeri extends CI_Controller {
                            
                             $data = array(                
                                 'title' => ' Edit Data Sarana & Prasarana', 
+                                'error_upload' => $this->upload->display_errors(),
                                 'galeri' => $this->m_galeri->detail($id_galeri),
                                 'isi'  => 'admin/galeri/v_edit'
                             );
                             $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+                            return;
                     }
                     else
                     {

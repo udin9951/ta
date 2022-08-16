@@ -173,10 +173,12 @@ class Pengurus extends CI_Controller {
                            
                             $data = array(                
                                 'title' => ' Edit Data Pengurus', 
+                                'error_upload' => $this->upload->display_errors(),
                                 'pengurus' => $this->m_pengurus->detail($id_pengurus),
                                 'isi'  => 'admin/pengurus/v_edit'
                             );
                             $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+                            return;
                     }
                     else
                     {

@@ -36,12 +36,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php $no=1; foreach ($galeri as $key => $value) { ?>
+                            <?php $no=1; foreach ($galeri as $key => $value) {
+                                    $date = DateTime::createFromFormat('Y-m-d', $value->tgl_galeri)->format('d-m-Y');
+                                ?>
                          
                             <tr>	
                                 <td><?= $no++; ?></td>
                                 <td><?= $value->judul_galeri?></td>
-                                <td><?= $value->tgl_galeri?></td>
+                                <td><?= $date?></td>
                                 <td> <img src="<?= base_url('sampul/'. $value->foto_galeri) ?>" width="150px"> </td>
                                 <td><?= $value->deskripsi_galeri?></td>
                                 <td><?= $value->nama_user?></td>

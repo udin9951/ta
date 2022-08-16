@@ -36,13 +36,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php $no=1; foreach ($berita as $key => $value) { ?>
+                            <?php $no=1; foreach ($berita as $key => $value) { 
+                                $date = DateTime::createFromFormat('Y-m-d', $value->tgl_berita)->format('d-m-Y');
+                            ?>
                          
                             <tr>	
                                 <td><?= $no++; ?></td>
                                 <td><?= $value->jdl_berita ?></td>
                                 <td><?= $value->slug_berita ?></td>
-                                <td><?= $value->tgl_berita ?></td>
+                                <td><?= $date ?></td>
                                 <td><?= $value->nama_user ?></td>
                                 <td> <img src="<?= base_url('gambar/'. $value->gambar_berita) ?>" width="150px"> </td>	
                                 <td>

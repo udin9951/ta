@@ -34,11 +34,13 @@
                             </thead>
                             <tbody>
                                               
-                            <?php $no=1; foreach ($soljum as $key => $value) { ?>
+                            <?php $no=1; foreach ($soljum as $key => $value) { 
+                                $date = DateTime::createFromFormat('Y-m-d', $value->tgl_soljum)->format('d-m-Y');    
+                            ?>
                          
                             <tr>    
                                 <td><?= $no++; ?></td>
-                                <td><?= $value->tgl_soljum?> </td>
+                                <td><?= $date?> </td>
                                 <td><?= $value->nama_imam?> </td>
                                 
                                 <td>

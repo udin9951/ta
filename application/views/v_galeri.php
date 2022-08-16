@@ -11,14 +11,14 @@
                    
                 </div>
             </div>
-            <div class="d-flex Gallery mb-3">
+            <div class="row d-flex Gallery mb-3">
 					<?php $no=1; foreach ($galeri as $key => $value) { ?>
-                    <div class="col-6 col-md-4">
-                        <div class="card">
-                        <img class="w-100" src="<?= file_exists(FCPATH.'/gambar/'. $value->foto_galeri) ? base_url('gambar/'. $value->foto_galeri) : "https://via.placeholder.com/300x300.png/001177?text=$value->foto_galeri"; ?>">
+                    <div class="col-6 col-md-6">
+                        <div class="services__item card">
+                        <img class="w-100 img-thumbnail" style="object-fit: revert !important;" src="<?= file_exists(FCPATH.'/sampul/'. $value->foto_galeri) ? base_url('sampul/'. $value->foto_galeri) : "https://via.placeholder.com/300x300.png/001177?text=$value->foto_galeri"; ?>">
                         <div class="card-body blog__item__text">
-                        <h5 class="card-title"><?= $value->judul_galeri?> </h5>
-                        <p>
+                        <h5 class="card-title" style="margin-bottom: 0rem;"><?= $value->judul_galeri?> </h5>
+                        <p style="margin-top : 0 !important">
                             <i class="fa fa-clock-o"></i><?= $value->tgl_galeri ?><br>
                             <?= $value->deskripsi_galeri?>
                         </p>

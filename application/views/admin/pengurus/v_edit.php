@@ -12,7 +12,11 @@
             </div>
             <div class="x_content">
                 <br />                
-              <?php 
+              <?php
+               if (isset($error_upload)) {
+                    echo ('<div class="alert alert-danger alert-dismissable ">
+                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'.$error_upload.'</div>');
+                   } 
               echo form_open_multipart('pengurus/edit/'.$pengurus->id_pengurus); ?>
 
             <div class="item form-group">

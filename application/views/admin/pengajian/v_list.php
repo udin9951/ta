@@ -38,12 +38,14 @@
                             <tbody>
 
                                 <?php $no = 1;
-                                foreach ($pengajian as $key => $value) { ?>
+                                foreach ($pengajian as $key => $value) {
+                                    $date = DateTime::createFromFormat('Y-m-d', $value->tgl_pengajian)->format('d-m-Y');
+                                ?>
 
                                     <tr>
                                         <td><?= $no++; ?></td>
                                         <td><?= $value->hari_pengajian ?> </td>
-                                        <td><?= $value->tgl_pengajian ?> </td>
+                                        <td><?= $date ?> </td>
                                         <td><?= $value->jam_pengajian ?> </td>
                                         <td><?= $value->nama_penceramah ?> </td>
                                         <td><?= $value->tema_pengajian ?> </td>
