@@ -110,17 +110,17 @@ class Kas_keluar extends CI_Controller {
         $pdf->AddPage();
         $pdf->Image('./icon/logo_.png',10,10,70,25);
         $pdf->Cell(50);
-        $pdf->SetFont('Times','B','20');
+        $pdf->SetFont('Times','B','10');
         $pdf->Cell(0,5,'Pengurus Masjid Al-Barqah',0,1,'C');
-        $pdf->Cell(50);
-        $pdf->Cell(0,4,'',0,1,'C');
         $pdf->Cell(50);
         $pdf->Cell(0,5,'Komplek Kayu Tangi II',0,1,'C');
         $pdf->Cell(50);
-        $pdf->Cell(0,4,'',0,1,'C');
-        $pdf->Cell(50);
-        $pdf->SetFont('Times','B','20');
+        $pdf->SetFont('Times','B','10');
         $pdf->Cell(0,5,'Banjarmasin',0,1,'C');
+        $pdf->Cell(50);
+        $pdf->Cell(0,5,'Jl. Brigjen H. Hasan Basri Komplek Kayu Tangi II',0,1,'C');
+        $pdf->Cell(50);
+        $pdf->Cell(0,5,'Telp.(021) 3303074',0,1,'C');
         $pdf->Cell(50);
         $pdf->Cell(0,4,'',0,1,'C');
         $pdf->SetLineWidth(1);		
@@ -128,23 +128,27 @@ class Kas_keluar extends CI_Controller {
         $pdf->SetLineWidth(0);				
         $pdf->Line(10,37,200,37);
         $pdf->SetFont('Arial','B',10);
-        $pdf->Cell(0,5,'Data Kas Keluar',0,1,'C');
+        $pdf->Cell(0,5,'Data Pengeluaran Dana',0,1,'C');
+        $pdf->Cell(0,5,'Masjid Al-Barqah',0,1,'C');
         $pdf->Ln(2);
         $pdf->Cell(10,6,'No',1,0,'C');
         $pdf->Cell(50,6,'Tanggal',1,0,'C');
         $pdf->Cell(90,6,'Uraian',1,0,'C');
-        $pdf->Cell(40,6,'Kas Keluar',1,1,'C');
+        $pdf->Cell(40,6,'Pengeluaran',1,1,'C');
         $pdf->SetFont('Arial','',10);
         $user = $this->M_kas_keluar->lists($filter);
+        $total = $this->M_kas_keluar->sumKas($filter);
         $no=0;
         foreach ($user as $data){
             $datetime = DateTime::createFromFormat('Y-m-d', $data->tgl_kas);
             $no++;
             $pdf->Cell(10,6,$no,1,0, 'C');
-            $pdf->Cell(50,6,$datetime->format('d-m-Y'),1,0);
+            $pdf->Cell(50,6,$datetime->format('d-m-Y'),1,0,'C');
             $pdf->Cell(90,6,$data->uraian_kas,1,0);
-            $pdf->Cell(40,6,$data->kas_keluar,1,1);
+            $pdf->Cell(40,6,"Rp " . number_format($data->kas_keluar,2,',','.'),1,1,'C');
         }
+        $pdf->Cell(150,6,'Total Pengeluaran',1,0,'C');
+        $pdf->Cell(40,6,"Rp " . number_format($total->kas_keluar,2,',','.'),1,1,'C');
         $pdf->Output();
     }
 
@@ -188,7 +192,7 @@ class Kas_keluar extends CI_Controller {
 			    $no++,
 			    $datetime->format('d-m-Y'),
 			    $ex->uraian_kas,
-			    $ex->kas_keluar,
+			    "Rp " . number_format($ex->kas_keluar,2,',','.'),
 			);
 
 			array_push($data, $kas);
@@ -203,17 +207,19 @@ class Kas_keluar extends CI_Controller {
     {
         $url = base_url('./icon/logo_.png');
         $kas = $this->M_kas_keluar->lists($filter);
+        $total = $this->M_kas_keluar->sumKas($filter);
         $data = "";
         $no = 1;
         foreach ($kas as $value) {
             $data .= "<tr>
-                    <td>".$no++."</td>
-                    <td>".$value->tgl_kas."</td>
+                    <td style='text-align : center;'>".$no++."</td>
+                    <td style='text-align : center;'>".$value->tgl_kas."</td>
                     <td>".$value->uraian_kas."</td>
-                    <td>".$value->kas_keluar."</td>
+                    <td style='text-align : center;'>"."Rp " . number_format($value->kas_keluar,2,',','.')."</td>
             </tr>
             ";
         }
+        $data .="<tr><td colspan='3' style='text-align : center;'>Total Pengeluaran</td><td style='text-align : center;'>"."Rp " . number_format($total->kas_keluar,2,',','.')."</td></tr>";
         echo "<!DOCTYPE html>
         <html>
         <head>
@@ -260,7 +266,10 @@ class Kas_keluar extends CI_Controller {
                     Jl. Brigjen H. Hasan Basri Komplek Kayu Tangi II<br>Telp.(021) 3303074</p>
                 </center>
             </div>
-            <hr>	
+            <hr>
+            <center><b>Data Pengeluaran Dana</b></center>	
+            <center><b>Masjid Al-Barqah</b></center>
+            <br>
         </div>
 
         <div class='row'>
@@ -276,7 +285,7 @@ class Kas_keluar extends CI_Controller {
                         <center>Uraian</center>
                     </th>		
                     <th width='200px'>
-                        <center>Kas keluar</center>
+                        <center>Pengeluaran</center>
                     </th>		
                 </tr>
                 $data

@@ -66,57 +66,72 @@ class Pengurus extends CI_Controller {
                         else if(ucfirst($this->input->post('jabatan_pengurus')) == 'Wakil Ketua'){
                             $no_urut = 2;
                             $las_count = $this->m_pengurus->last($no_urut);
-                            $data = array(                
-                                'title' => 'Input Data Pengurus',
-                                'error_upload' => 'Wakil Ketua sudah ada',
-                                'isi'=> 'admin/pengurus/v_add'  
-                            );
-                            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
-                            return;
+                            if(!empty($las_count))
+                            {
+                                $data = array(                
+                                    'title' => 'Input Data Pengurus',
+                                    'error_upload' => 'Wakil Ketua sudah ada',
+                                    'isi'=> 'admin/pengurus/v_add'  
+                                );
+                                $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+                                return;
+                            }
                         }
-                        else if(ucfirst($this->input->post('jabatan_pengurus')) == 'Sekertaris'){
+                        else if(ucfirst($this->input->post('jabatan_pengurus')) == 'Sekretaris'){
                             $no_urut = 3;
                             $las_count = $this->m_pengurus->last($no_urut);
-                            $data = array(                
-                                'title' => 'Input Data Pengurus',
-                                'error_upload' => 'Sekertaris sudah ada',
-                                'isi'=> 'admin/pengurus/v_add'  
-                            );
-                            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
-                            return;
+                            if(!empty($las_count))
+                            {
+                                $data = array(                
+                                    'title' => 'Input Data Pengurus',
+                                    'error_upload' => 'Sekretaris sudah ada',
+                                    'isi'=> 'admin/pengurus/v_add'  
+                                );
+                                $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+                                return;
+                            }
                         }
-                        else if(ucfirst($this->input->post('jabatan_pengurus')) == 'Wakil Sekertaris'){
+                        else if(ucfirst($this->input->post('jabatan_pengurus')) == 'Wakil Sekretaris'){
                             $no_urut = 4;
                             $las_count = $this->m_pengurus->last($no_urut);
-                            $data = array(                
-                                'title' => 'Input Data Pengurus',
-                                'error_upload' => 'Wakil Sekertaris sudah ada',
-                                'isi'=> 'admin/pengurus/v_add'  
-                            );
-                            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
-                            return;
+                            if(!empty($las_count))
+                            {
+                                $data = array(                
+                                    'title' => 'Input Data Pengurus',
+                                    'error_upload' => 'Wakil Sekretaris sudah ada',
+                                    'isi'=> 'admin/pengurus/v_add'  
+                                );
+                                $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+                                return;
+                            }
                         }
                         else if(ucfirst($this->input->post('jabatan_pengurus')) == 'Bendahara'){
                             $no_urut = 5;
                             $las_count = $this->m_pengurus->last($no_urut);
-                            $data = array(                
-                                'title' => 'Input Data Pengurus',
-                                'error_upload' => 'Bendahara sudah ada',
-                                'isi'=> 'admin/pengurus/v_add'  
-                            );
-                            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
-                            return;
+                            if(!empty($las_count))
+                            {
+                                $data = array(                
+                                    'title' => 'Input Data Pengurus',
+                                    'error_upload' => 'Bendahara sudah ada',
+                                    'isi'=> 'admin/pengurus/v_add'  
+                                );
+                                $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+                                return;
+                            }
                         }
                         else if(ucfirst($this->input->post('jabatan_pengurus')) == 'Wakil Bendahara'){
                             $no_urut = 6;
                             $las_count = $this->m_pengurus->last($no_urut);
-                            $data = array(                
-                                'title' => 'Input Data Pengurus',
-                                'error_upload' => 'Wakil Bendahara sudah ada',
-                                'isi'=> 'admin/pengurus/v_add'  
-                            );
-                            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
-                            return;
+                            if(!empty($las_count))
+                            {
+                                $data = array(                
+                                    'title' => 'Input Data Pengurus',
+                                    'error_upload' => 'Wakil Bendahara sudah ada',
+                                    'isi'=> 'admin/pengurus/v_add'  
+                                );
+                                $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+                                return;
+                            }
                         }
                         else if(ucfirst($this->input->post('jabatan_pengurus')) == 'Anggota'){
                             $las_count = $this->m_pengurus->last()->no_urut;
@@ -399,7 +414,7 @@ class Pengurus extends CI_Controller {
                         <center>No</center>
                     </th>		
                     <th width='500px'>
-                        <center>Sarana & Prasarana</center>
+                        <center>Pengurus</center>
                     </th>		
                     <th width='500px'>
                         <center>Deskripsi</center>

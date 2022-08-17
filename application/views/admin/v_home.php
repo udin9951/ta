@@ -7,9 +7,9 @@
                 <div class="col-md-4">
                   <div class="card">
                     <div class="card-body">
-                      <div class="alert alert-primary alert-dismissible">
+                      <div class="alert alert-success alert-dismissible">
                           <h5>
-                          <i class="fa fa-info"></i> Total Pemasukan Masjid</h5>
+                          <i class="fa fa-info"></i> Total Penerimaan Masjid</h5>
                           <h2><b><?= "Rp " . number_format($total_kas_masuk->kas_masuk,2,',','.'); ?></b></h2>
                       </div>
                     </div>
@@ -18,7 +18,7 @@
                 <div class="col-md-4">
                   <div class="card">
                     <div class="card-body">
-                      <div class="alert alert-warning alert-dismissible">
+                      <div class="alert alert-primary alert-dismissible">
                           <h5>
                           <i class="fa fa-warning"></i> Total Pengeluaran Masjid</h5>
                           <h2><b><?= "Rp " . number_format($total_kas_keluar->kas_keluar,2,',','.'); ?></b></h2>
@@ -29,9 +29,9 @@
                 <div class="col-md-4">
                   <div class="card">
                     <div class="card-body">
-                      <div class="alert alert-success alert-dismissible">
+                      <div class="alert alert-info alert-dismissible">
                           <h5>
-                          <i class="fa fa-info"></i> Total Pemasukan Masjid</h5>
+                          <i class="fa fa-info"></i> Total Saldo Akhir</h5>
                           <h2><b><?= "Rp " . number_format($total_kas_masuk->kas_masuk - $total_kas_keluar->kas_keluar,2,',','.'); ?></b></h2>
                       </div>
                     </div>

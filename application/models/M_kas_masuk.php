@@ -20,7 +20,7 @@ class M_kas_masuk extends CI_Model {
             $this->db->where("tgl_kas <=", $end);
         }
         $this->db->where('jenis_kas', 'Masuk');
-        $this->db->order_by('id_kas', 'DESC');
+        $this->db->order_by('tgl_kas', 'asc');
         return $this->db->get()->result();
     }
 

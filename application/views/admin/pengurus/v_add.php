@@ -44,8 +44,8 @@
                             <option value="">Pilih</option>
                             <option value="Ketua">Ketua</option>
                             <option value="Wakil Ketua">Wakil Ketua</option>
-                            <option value="Sekertaris">Sekeretaris</option>
-                            <option value="Wakil Sekertaris">Wakil Sekeretaris</option>
+                            <option value="Sekretaris">Sekretaris</option>
+                            <option value="Wakil Sekretaris">Wakil Sekretaris</option>
                             <option value="Bendahara">Bendahara</option>
                             <option value="Wakil Bendahara">Wakil Bendahara</option>
                             <option value="Anggota">Anggota</option>

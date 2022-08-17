@@ -55,7 +55,7 @@ class M_home extends CI_Model {
          {
              $this->db->where("a.hari_pengajian", $hari);
          }             
-        $this->db->order_by('a.tgl_pengajian', 'desc');
+        $this->db->order_by('a.tgl_pengajian', 'asc');
         return $this->db->get()->result();
     }
 
@@ -125,7 +125,7 @@ class M_home extends CI_Model {
         {
             $this->db->where('jenis_kas', $type);
         }
-        $this->db->order_by('tgl_kas', 'DESC');
+        $this->db->order_by('tgl_kas', 'asc');
         return $this->db->get()->result();
     }
     

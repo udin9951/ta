@@ -89,7 +89,7 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $date?></td>
                                 <td><?= $value->uraian_kas?></td>
-                                <td><?= $value->kas_keluar?></td>
+                                <td><?= "Rp " . number_format($value->kas_keluar,2,',','.');?></td>
                                 <td><?= $value->nama_user?></td>
 
                                 <td>

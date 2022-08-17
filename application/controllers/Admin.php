@@ -17,7 +17,7 @@ class Admin extends CI_Controller {
         $data = array(
             'total_kas_masuk' => $this->M_kas_masuk->sumKas(),
             'total_kas_keluar' => $this->M_kas_keluar->sumKas(),
-            'title' => 'Selamat Datang Admin', 
+            'title' => 'Selamat Datang '.$this->session->userdata('username'), 
             'isi'  => 'admin/v_home'
         );
         $this->load->view('admin/layout/v_wrapper', $data, FALSE);

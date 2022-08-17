@@ -79,7 +79,7 @@
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Uraian</th>
-                                <th>Jumlah Pemasukan</th>
+                                <th>Jumlah Penerimaan</th>
                                 <th>User</th>
                                 <th>Aksi</th>
                                 </tr>
@@ -93,7 +93,7 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $date?></td>
                                 <td><?= $value->uraian_kas?></td>
-                                <td><?= $value->kas_masuk?></td>
+                                <td><?= "Rp " . number_format($value->kas_masuk,2,',','.');?></td>
                                 <td><?= $value->nama_user?></td>
 
                                 <td>
