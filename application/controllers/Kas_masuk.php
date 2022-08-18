@@ -137,7 +137,7 @@ class Kas_masuk extends CI_Controller {
         $pdf->Ln(2);
         $pdf->Cell(10,6,'No',1,0,'C');
         $pdf->Cell(50,6,'Tanggal',1,0,'C');
-        $pdf->Cell(90,6,'Uraian',1,0);
+        $pdf->Cell(90,6,'Uraian',1,0,'C');
         $pdf->Cell(40,6,'Penerimaan',1,1,'C');
         $pdf->SetFont('Arial','',10);
         $user = $this->M_kas_masuk->lists($filter);
@@ -148,7 +148,7 @@ class Kas_masuk extends CI_Controller {
             $no++;
             $pdf->Cell(10,6,$no,1,0, 'C');
             $pdf->Cell(50,6,$datetime->format('d-m-Y'),1,0, 'C');
-            $pdf->Cell(90,6,$data->uraian_kas,1,0, 'C');
+            $pdf->Cell(90,6,$data->uraian_kas,1,0);
             $pdf->Cell(40,6,"Rp " . number_format($data->kas_masuk,2,',','.'),1,1, 'C');
         }
         $pdf->Cell(150,6,'Total Penerimaan',1,0,'C');
@@ -273,6 +273,9 @@ class Kas_masuk extends CI_Controller {
                 </center>
             </div>
             <hr>	
+            <center><b>Data Penerimaan Dana</b></center>	
+            <center><b>Masjid Al-Barqah</b></center>
+            <br>  
         </div>
 
         <div class='row'>
@@ -282,7 +285,7 @@ class Kas_masuk extends CI_Controller {
                         <center>No</center>
                     </th>		
                     <th width='100px'>
-                        <center>Tanggal Kas</center>
+                        <center>Tanggal</center>
                     </th>		
                     <th width='320px'>
                         <center>Uraian</center>

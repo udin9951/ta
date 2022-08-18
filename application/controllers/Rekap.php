@@ -48,17 +48,17 @@ class rekap extends CI_Controller {
         $pdf->AddPage();
         $pdf->Image('./icon/logo_.png',10,10,70,25);
         $pdf->Cell(50);
-        $pdf->SetFont('Times','B','20');
+        $pdf->SetFont('Times','B','10');
         $pdf->Cell(0,5,'Pengurus Masjid Al-Barqah',0,1,'C');
-        $pdf->Cell(50);
-        $pdf->Cell(0,4,'',0,1,'C');
         $pdf->Cell(50);
         $pdf->Cell(0,5,'Komplek Kayu Tangi II',0,1,'C');
         $pdf->Cell(50);
-        $pdf->Cell(0,4,'',0,1,'C');
-        $pdf->Cell(50);
-        $pdf->SetFont('Times','B','20');
+        $pdf->SetFont('Times','B','10');
         $pdf->Cell(0,5,'Banjarmasin',0,1,'C');
+        $pdf->Cell(50);
+        $pdf->Cell(0,5,'Jl. Brigjen H. Hasan Basri Komplek Kayu Tangi II',0,1,'C');
+        $pdf->Cell(50);
+        $pdf->Cell(0,5,'Telp.(021) 3303074',0,1,'C');
         $pdf->Cell(50);
         $pdf->Cell(0,4,'',0,1,'C');
         $pdf->SetLineWidth(1);		
@@ -72,8 +72,8 @@ class rekap extends CI_Controller {
         $pdf->Cell(10,6,'No',1,0,'C');
         $pdf->Cell(50,6,'Tanggal',1,0,'C');
         $pdf->Cell(70,6,'Uraian',1,0,'C');
-        $pdf->Cell(30,6,'Kas Masuk',1,0,'C');
-        $pdf->Cell(30,6,'Kas Keluar',1,1,'C');
+        $pdf->Cell(30,6,'Penerimaan',1,0,'C');
+        $pdf->Cell(30,6,'Pengeluaran',1,1,'C');
         $pdf->SetFont('Arial','',10);
         $user =$this->M_rekap->lists($filter);
         $no=0;
@@ -84,18 +84,34 @@ class rekap extends CI_Controller {
             $total_keluar += $data->kas_keluar;
             $datetime = DateTime::createFromFormat('Y-m-d', $data->tgl_kas);
             $no++;
+            if(empty($data->kas_masuk)){
+                $data->kas_masuk = "-";
+            }
+            else
+            {
+                $data->kas_masuk = "Rp. ".number_format($data->kas_masuk,0,',','.');
+            }
+            
+            if(empty($data->kas_keluar)){
+                $data->kas_keluar = "-";
+            }
+            else
+            {
+                $data->kas_keluar = "Rp. ".number_format($data->kas_keluar,0,',','.');
+            }
+
             $pdf->Cell(10,6,$no,1,0, 'C');
-            $pdf->Cell(50,6,$datetime->format('d-m-Y'),1,0);
+            $pdf->Cell(50,6,$datetime->format('d-m-Y'),1,0,'C');
             $pdf->Cell(70,6,$data->uraian_kas,1,0);
-            $pdf->Cell(30,6,$data->kas_masuk,1,0);
-            $pdf->Cell(30,6,$data->kas_keluar,1,1);
+            $pdf->Cell(30,6,$data->kas_masuk,1,0,'C');
+            $pdf->Cell(30,6,$data->kas_keluar,1,1,'C');
         }
-        $pdf->Cell(130,6,'Total Kas Masuk',1,0,'C');
-        $pdf->Cell(60,6,$total_masuk,1,1,'C');
-        $pdf->Cell(130,6,'Total Kas Keluar',1,0,'C');
-        $pdf->Cell(60,6,$total_keluar,1,1,'C');
+        $pdf->Cell(130,6,'Total Penerimaan',1,0,'C');
+        $pdf->Cell(60,6,"Rp " . number_format($total_masuk,2,',','.'),1,1,'C');
+        $pdf->Cell(130,6,'Total Pengeluaran',1,0,'C');
+        $pdf->Cell(60,6,"Rp " . number_format($total_keluar,2,',','.'),1,1,'C');
         $pdf->Cell(130,6,'Total Saldo Akhir Kas Masjid',1,0,'C');
-        $pdf->Cell(60,6,$total_masuk - $total_keluar,1,1,'C');
+        $pdf->Cell(60,6,"Rp " . number_format(($total_masuk - $total_keluar),2,',','.'),1,1,'C');
 
         $pdf->Output();
     }
@@ -136,14 +152,31 @@ class rekap extends CI_Controller {
 
             $total_masuk += $ex->kas_masuk;
             $total_keluar += $ex->kas_keluar;
+            $date = DateTime::createFromFormat('Y-m-d', $ex->tgl_kas)->format('d-m-Y');
+            
+            if(empty($ex->kas_masuk)){
+                $ex->kas_masuk = "-";
+            }
+            else
+            {
+                $ex->kas_masuk = "Rp. ".number_format($ex->kas_masuk,0,',','.');
+            }
+            
+            if(empty($ex->kas_keluar)){
+                $ex->kas_keluar = "-";
+            }
+            else
+            {
+                $ex->kas_keluar = "Rp. ".number_format($ex->kas_keluar,0,',','.');
+            }
 			// masukkan data dari database ke variabel array
 			// silahkan sobat sesuaikan dengan nama field pada tabel database
 			$kas = array(
 			    $no++,
-			    $ex->tgl_kas,
+			    $date,
 			    $ex->uraian_kas,
-                "Rp " . number_format(($ex->kas_masuk),2,',','.'),
-                "Rp " . number_format(($ex->kas_keluar),2,',','.'),
+                $ex->kas_masuk,
+                $ex->kas_keluar,
 			);
 
 			array_push($data, $kas);
@@ -182,122 +215,141 @@ class rekap extends CI_Controller {
     }
     
     public function print($filter = NULL)
-        {
+    {
 
-			$url = base_url('./icon/logo_.png');
-            $kas = $this->M_rekap->lists($filter);
-			$data = "";
-			$no = 1;
-			$total_masuk = 0;
-			$total_keluar = 0;
-			foreach ($kas as $value) {
-                $total_masuk += $value->kas_masuk;
-                $total_keluar += $value->kas_keluar;
-
-				$data .= "<tr>
-						<td>".$no++."</td>
-						<td>".$value->tgl_kas."</td>
-						<td>".$value->uraian_kas."</td>
-						<td>"."Rp " . number_format(($value->kas_masuk),2,',','.')."</td>
-						<td>"."Rp " . number_format(($value->kas_keluar),2,',','.')."</td>
-				</tr>
-				";
-			}
-
-            $data .= "<tr>
-                    <td colspan='3'><center>Total Kas Masuk</center></td>
-                    <td colspan='2'> Rp".number_format(($total_masuk),2,',','.')."</td>
-            </tr>";
-
-            $data .= "<tr>
-                    <td colspan='3'><center>Total Kas Keluar</center></td>
-                    <td colspan='2'> Rp".number_format(($total_keluar),2,',','.')."</td>
-            </tr>";
+        $url = base_url('./icon/logo_.png');
+        $kas = $this->M_rekap->lists($filter);
+        $data = "";
+        $no = 1;
+        $total_masuk = 0;
+        $total_keluar = 0;
+        foreach ($kas as $value) {
+            $total_masuk += $value->kas_masuk;
+            $total_keluar += $value->kas_keluar;
+            $date = DateTime::createFromFormat('Y-m-d', $value->tgl_kas)->format('d-m-Y');
+            if(empty($value->kas_masuk)){
+                $value->kas_masuk = "-";
+            }
+            else
+            {
+                $value->kas_masuk = "Rp. ".number_format($value->kas_masuk,0,',','.');
+            }
+            
+            if(empty($value->kas_keluar)){
+                $value->kas_keluar = "-";
+            }
+            else
+            {
+                $value->kas_keluar = "Rp. ".number_format($value->kas_keluar,0,',','.');
+            }
 
             $data .= "<tr>
-                    <td colspan='3'><center>Total Saldo Akhir Kas Masjid</center></td>
-                    <td colspan='2'> Rp".number_format(($total_masuk - $total_keluar),2,',','.')."</td>
-            </tr>";
-
-			echo "<!DOCTYPE html>
-			<html>
-			<head>
-				<title>Cetak Data Masjid Al Barqah</title>
-
-				<style>
-				* {
-				box-sizing: border-box;
-				}
-
-				/* Create two unequal columns that floats next to each other */
-				.column {
-				float: left;
-				padding: 10px;
-				height: 120px; /* Should be removed. Only for demonstration */
-				}
-
-				.left {
-				width: 25%;
-				}
-
-				.right {
-				width: 75%;
-				}
-
-				table, th, td {
-					border: 1px solid;
-				}
-
-				/* Clear floats after the columns */
-				
-				</style>
-
-			</head>
-			<body>
-			<div class='row'>
-				<div class='column left'>
-					<img class='' src='$url' style='height: 100px;'>
-				</div>
-				<div class='column right'>
-					<center>
-						<p>Pengurus Masjid Al-Barqah<br>
-						Komplek Kayu Tangi II Banjarmasin<br>
-						Jl. Brigjen H. Hasan Basri Komplek Kayu Tangi II<br>Telp.(021) 3303074</p>
-					</center>
-				</div>
-				<hr>	
-			</div>
-
-			<div class='row'>
-				<table>
-					<tr>
-						<th width='100px'>
-							<center>No</center>
-						</th>		
-						<th width='100px'>
-							<center>Tanggal Kas</center>
-						</th>		
-						<th width='210px'>
-							<center>Uraian</center>
-						</th>		
-						<th width='150px'>
-							<center>Kas Masuk</center>
-						</th>		
-						<th width='150px'>
-							<center>Kas Keluar</center>
-						</th>		
-					</tr>
-					$data
-					
-				</table>
-			</div>
-			<script>
-				window.print();
-			</script>
-
-			</body>
-			</html>";
+                    <td style='text-align : center;'>".$no++."</td>
+                    <td style='text-align : center;'>".$date."</td>
+                    <td>".$value->uraian_kas."</td>
+                    <td style='text-align : center;'>".$value->kas_masuk."</td>
+                    <td style='text-align : center;'>".$value->kas_keluar."</td>
+            </tr>
+            ";
         }
+
+        $data .= "<tr>
+                <td colspan='3' style='text-align : center;'><center>Total Penerimaan</center></td>
+                <td colspan='2' style='text-align : center;'> Rp".number_format(($total_masuk),2,',','.')."</td>
+        </tr>";
+
+        $data .= "<tr>
+                <td colspan='3' style='text-align : center;'><center>Total Pengeluaran</center></td>
+                <td colspan='2' style='text-align : center;'> Rp".number_format(($total_keluar),2,',','.')."</td>
+        </tr>";
+
+        $data .= "<tr>
+                <td colspan='3' style='text-align : center;'><center>Total Saldo Akhir Kas Masjid</center></td>
+                <td colspan='2' style='text-align : center;'> Rp".number_format(($total_masuk - $total_keluar),2,',','.')."</td>
+        </tr>";
+
+        echo "<!DOCTYPE html>
+        <html>
+        <head>
+            <title>Cetak Data Masjid Al Barqah</title>
+
+            <style>
+            * {
+            box-sizing: border-box;
+            }
+
+            /* Create two unequal columns that floats next to each other */
+            .column {
+            float: left;
+            padding: 10px;
+            height: 120px; /* Should be removed. Only for demonstration */
+            }
+
+            .left {
+            width: 25%;
+            }
+
+            .right {
+            width: 75%;
+            }
+
+            table, th, td {
+                border: 1px solid;
+            }
+
+            /* Clear floats after the columns */
+            
+            </style>
+
+        </head>
+        <body>
+        <div class='row'>
+            <div class='column left'>
+                <img class='' src='$url' style='height: 100px;'>
+            </div>
+            <div class='column right'>
+                <center>
+                    <p>Pengurus Masjid Al-Barqah<br>
+                    Komplek Kayu Tangi II Banjarmasin<br>
+                    Jl. Brigjen H. Hasan Basri Komplek Kayu Tangi II<br>Telp.(021) 3303074</p>
+                </center>
+            </div>
+            <hr>
+            <center><b>Data Penerimaan dan Pengeluaran Dana</b></center>	
+            <center><b>Masjid Al-Barqah</b></center>
+            <br> 	
+        </div>
+
+        <div class='row'>
+            <table>
+                <tr>
+                    <th width='100px'>
+                        <center>No</center>
+                    </th>		
+                    <th width='100px'>
+                        <center>Tanggal</center>
+                    </th>		
+                    <th width='210px'>
+                        <center>Uraian</center>
+                    </th>		
+                    <th width='150px'>
+                        <center>Penerimaan</center>
+                    </th>		
+                    <th width='150px'>
+                        <center>Pengeluaran</center>
+                    </th>		
+                </tr>
+                $data
+                
+            </table>
+        </div>
+        <script>
+            window.print();
+        </script>
+
+        </body>
+        </html>";
+    }
     
 }
 

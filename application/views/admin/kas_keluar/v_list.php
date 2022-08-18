@@ -55,7 +55,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="date">Filter By Date</label>
+                                        <label for="date">Tanggal Mulai</label>
                                         <input class="form-control" type="date" name="filter" id="date-filter" value="<?= !empty($filter) ? $filter : "" ?>">
                                     </div>
                                 </div>

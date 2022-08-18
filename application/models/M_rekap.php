@@ -14,7 +14,7 @@ class M_rekap extends CI_Model {
         {
             $this->db->where("tgl_kas >=", $filter);
         }
-        if(!empty($filter))
+        if(!empty($end))
         {
             $this->db->where("tgl_kas <=", $end);
         }
@@ -22,7 +22,7 @@ class M_rekap extends CI_Model {
         {
             $this->db->where('jenis_kas', $type);
         }
-        $this->db->order_by('id_kas', 'DESC');
+        $this->db->order_by('tgl_kas', 'asc');
         return $this->db->get()->result();
     }
 

@@ -113,11 +113,11 @@
                                 <?php
                                     if($value->kas_masuk != 0)
                                     {
-                                        echo "<td>".$value->kas_masuk."</td>";
+                                        echo "<td>"."Rp. ".number_format($value->kas_masuk,0,',','.')."</td>";
                                     }
                                     else
                                     {
-                                        echo "<td>".$value->kas_keluar."</td>";
+                                        echo "<td>"."Rp. ".number_format($value->kas_keluar,0,',','.')."</td>";
                                     }
                                 ?>
                             </tr>

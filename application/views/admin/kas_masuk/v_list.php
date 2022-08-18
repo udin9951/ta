@@ -11,7 +11,7 @@
 
             <div class="alert alert-success alert-dismissible">
     <h5>
-        <i class="fa fa-info"></i> Total Pemasukan Masjid</h5>
+        <i class="fa fa-info"></i> Total Penerimaan Masjid</h5>
         <h2><?= "Rp " . number_format($total_kas_masuk->kas_masuk,2,',','.'); ?></h2>
 
 </div>
