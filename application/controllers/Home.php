@@ -2,11 +2,18 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+require_once APPPATH . 'third_party/codeigniter-guzzle/vendor/autoload.php';
+// use GuzzleHttp\Client;
+
 class Home extends CI_Controller {
+
 
 	public function __construct()
 	{
 		parent::__construct();
+        $this->load->helper('form');
+        $this->load->helper('url');
+
 		$this->load->model('m_home');
 		$this->load->model('m_galeri');
 
@@ -14,14 +21,80 @@ class Home extends CI_Controller {
    
     public function index()
     {
+		$client = new GuzzleHttp\Client();
+
+		$url="https://api.myquran.com/v1/sholat";
+
+
+		$res_kota = $client->request('GET', $url.'/kota/semua');
+		$res_jadwal = $client->request('GET',$url.'/jadwal/2113/'.date('Y').'/'.date('m').'/'.date('d') );
+		$list_kota = json_decode($res_kota->getBody());
+		$jadwal_shalat = json_decode($res_jadwal->getBody());
+
         $data = array(
-            'title' => 'Web Informasi Masjid',         
-             'galeri' => $this->m_galeri->lists(),          
-             'berita' => $this->m_home->slider_berita(),   
+			'wilayah'	=> '2113',
+            'title' => 'Web Informasi Masjid',
+			'list_kota' => $list_kota,         
+			'jadwal_shalat' => $jadwal_shalat->data->jadwal,         
+            'galeri' => $this->m_galeri->lists(),          
+            'berita' => $this->m_home->slider_berita(),   
             'isi'  => 'v_home'
         );
         $this->load->view('layout/v_wrapper', $data, FALSE);
     }
+
+	public function get_kota()
+	{
+		$client = new GuzzleHttp\Client();
+		$url="https://api.myquran.com/v1/sholat";
+		$type = $this->input->post('type');
+		$tanggal = $this->input->post('date');
+
+		if(!empty($type) && $type == "Besok")
+		{
+			$hari = date('d', strtotime('+1 day', strtotime($tanggal)));
+		}
+		else if(!empty($type) && $type == "Kemarin")
+		{
+			$hari = date('d', strtotime('-1 day', strtotime($tanggal)));
+		}
+		else
+		{
+			$hari = date('d');
+		}
+
+		$kota = $this->input->post('kota');
+
+		$res_jadwal = $client->request('GET',$url.'/jadwal/'.$kota.'/'.date('Y').'/'.date('m').'/'.$hari );
+		$res_jadwal = json_decode($res_jadwal->getBody());
+		$res_jadwal = $res_jadwal->data->jadwal;
+		echo json_encode($res_jadwal);
+	}
+
+	public function get_per_month()
+	{
+		
+		$client = new GuzzleHttp\Client();
+		$url="https://api.myquran.com/v1/sholat";
+		$kota = $this->input->post('kota');
+		$date =  $this->input->post('date-now');
+
+
+		$month = date('m', strtotime('+0 day', strtotime($date)));
+		$years = date('Y', strtotime('+0 day', strtotime($date)));
+
+		$res_jadwal = $client->request('GET',$url.'/jadwal/'.$kota.'/'.$years.'/'.$month );
+		$res_jadwal = json_decode($res_jadwal->getBody());
+		$res_jadwal = $res_jadwal->data->jadwal;
+
+		$data = array(
+			'title' => 'Data Jadwal Shalat',
+			'shalat' => $res_jadwal,
+			'isi'=> 'v_shalat',
+			'tanggal' => $date 
+			);
+		$this->load->view('layout/v_wrapper', $data, FALSE);
+	}
     
 	public function galeri()
 	{
