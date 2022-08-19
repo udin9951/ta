@@ -116,11 +116,11 @@
                         <?php
                             if($value->kas_masuk != 0)
                             {
-                                echo "<td>".$value->kas_masuk."</td>";
+                                echo "<td>"."Rp. ".number_format($value->kas_masuk,0,',','.')."</td>";
                             }
                             else
                             {
-                                echo "<td>".$value->kas_keluar."</td>";
+                                echo "<td>"."Rp. ".number_format($value->kas_keluar,0,',','.')."</td>";
                             }
                         ?>
                     </tr>
@@ -129,15 +129,15 @@
                             <td class="text-center" colspan="4"><b>Saldo</b></td>
                             <?php if($type == "")
                             {
-                                echo "<td colspan='1'>".$total_kas."</td>";
+                                echo "<td colspan='1'>"."Rp. ".number_format($total_kas,0,',','.')."</td>";
                             }
                             else if($type == "Masuk")
                             {
-                                echo "<td colspan='1'>".$kas_masuk->kas_masuk."</td>";
+                                echo "<td colspan='1'>"."Rp. ".number_format($kas_masuk->kas_masuk,0,',','.')."</td>";
                             }
                             else if($type == "Keluar")
                             {
-                                echo "<td colspan='1'>".$kas_keluar->kas_keluar."</td>";
+                                echo "<td colspan='1'>"."Rp. ".number_format($kas_keluar->kas_keluar,0,',','.')."</td>";
                             }
                             ?>
                     </tr>
