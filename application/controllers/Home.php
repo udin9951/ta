@@ -86,12 +86,12 @@ class Home extends CI_Controller {
 		$res_jadwal = $client->request('GET',$url.'/jadwal/'.$kota.'/'.$years.'/'.$month );
 		$res_jadwal = json_decode($res_jadwal->getBody());
 		$res_jadwal = $res_jadwal->data->jadwal;
-
+		$bulan = DateTime::createFromFormat('Y-m-d', $date)->format('F');
 		$data = array(
 			'title' => 'Data Jadwal Shalat',
 			'shalat' => $res_jadwal,
 			'isi'=> 'v_shalat',
-			'tanggal' => $date 
+			'tanggal' => $bulan, 
 			);
 		$this->load->view('layout/v_wrapper', $data, FALSE);
 	}

@@ -35,12 +35,12 @@
                 ?>
                 <h3>
                     <center>Data Waktu Shalat<br>
-                    Tanggal <?= $tanggal?></center>
+                    Bulan <?= $tanggal?></center>
                 </h3>
                 <hr>
                 <hr>
                 <div class="card-body">
-                    <h5 class="card-title" id="title-shalat">Jadwal Shalat Tanggal <?= $tanggal  ?></h5>
+                    <h5 class="card-title" id="title-shalat">Jadwal Shalat Bulan <?= $tanggal  ?></h5>
                     <center>
                         <table class="table table-striped">
                         <tbody>
