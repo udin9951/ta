@@ -253,24 +253,24 @@ class Pengurus extends CI_Controller {
             redirect('pengurus');
         }
 
-        public function cetak()
+    public function cetak()
     {
         error_reporting(0); // AGAR ERROR MASALAH VERSI PHP TIDAK MUNCUL
         $pdf = new FPDF('P', 'mm','A4');
         $pdf->AddPage();
         $pdf->Image('./icon/logo_.png',10,10,70,25);
         $pdf->Cell(50);
-        $pdf->SetFont('Times','B','20');
+        $pdf->SetFont('Times','B','10');
         $pdf->Cell(0,5,'Pengurus Masjid Al-Barqah',0,1,'C');
-        $pdf->Cell(50);
-        $pdf->Cell(0,4,'',0,1,'C');
         $pdf->Cell(50);
         $pdf->Cell(0,5,'Komplek Kayu Tangi II',0,1,'C');
         $pdf->Cell(50);
-        $pdf->Cell(0,4,'',0,1,'C');
-        $pdf->Cell(50);
-        $pdf->SetFont('Times','B','20');
+        $pdf->SetFont('Times','B','10');
         $pdf->Cell(0,5,'Banjarmasin',0,1,'C');
+        $pdf->Cell(50);
+        $pdf->Cell(0,5,'Jl. Brigjen H. Hasan Basri Komplek Kayu Tangi II',0,1,'C');
+        $pdf->Cell(50);
+        $pdf->Cell(0,5,'Telp.(021) 3303074',0,1,'C');
         $pdf->Cell(50);
         $pdf->Cell(0,4,'',0,1,'C');
         $pdf->SetLineWidth(1);		
@@ -354,9 +354,9 @@ class Pengurus extends CI_Controller {
         $no = 1;
         foreach ($kas as $value) {
             $data .= "<tr>
-                    <td>".$no++."</td>
-                    <td>".$value->nama_pengurus."</td>
-                    <td>".$value->jabatan_pengurus."</td>
+                    <td style='text-align : center;'>".$no++."</td>
+                    <td style='text-align : center;'>".$value->nama_pengurus."</td>
+                    <td style='text-align : center;'>".$value->jabatan_pengurus."</td>
             </tr>
             ";
         }
