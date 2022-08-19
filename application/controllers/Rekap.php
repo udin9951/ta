@@ -124,7 +124,8 @@ class rekap extends CI_Controller {
 		$writer->openToBrowser($file_path);
 		//silahkan sobat sesuaikan dengan data yang ingin sobat tampilkan
 
-		$label = ['Laporan Data Rekap Kas Masjid'];
+		$label1 = ['Laporan Penerimaan dan Pengeluaran Dana'];
+        $label2 = ['Masjid Al-Barqah'];
 		$spasi1 = [''];
 		$spasi2 = [''];
 		$spasi3 = [''];
@@ -137,7 +138,8 @@ class rekap extends CI_Controller {
 		];
 
 
-		$writer->addRow($label);
+		$writer->addRow($label1);
+		$writer->addRow($label2);
 		$writer->addRow($spasi1);
 		$writer->addRow($spasi2);
 		$writer->addRow($spasi3);

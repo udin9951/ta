@@ -21,6 +21,7 @@
 				$username = $cek->username;
 				$nama_user = $cek->nama_user;
 				$level = $cek->level;
+				$foto =  $cek->foto_user;
 				// $id_user = $cek->id_user;
 				
 				//buat session
@@ -28,6 +29,7 @@
 				$this->ci->session->set_userdata('username',$username);
 				$this->ci->session->set_userdata('nama_user',$nama_user);
 				$this->ci->session->set_userdata('level',$level);
+				$this->ci->session->set_userdata('foto',$foto);
 				//redirect halaman home
 				redirect('admin');
 			}else{

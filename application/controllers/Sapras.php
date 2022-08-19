@@ -16,165 +16,165 @@ public function __construct()
 
     }
 
-      public function index()
-        {
-            $data = array(
-                'title' => 'Data Sarana & Prasarana', 
-                'sapras' => $this->m_sapras->lists(),
-                'isi'  => 'admin/sapras/v_list'
-            );
-            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+    public function index()
+    {
+        $data = array(
+            'title' => 'Data Sarana & Prasarana', 
+            'sapras' => $this->m_sapras->lists(),
+            'isi'  => 'admin/sapras/v_list'
+        );
+        $this->load->view('admin/layout/v_wrapper', $data, FALSE);
 
-        }
+    }
 
-         public function add()
-        {         
-            $this->form_validation->set_rules('nama_sapras','Nama Sarana & Prasarana', 
-                                                'required|is_unique[sapras.nama_sapras]',
-                                                array(
-                                                    'required' => "Sarana Dan Prasarana Wajib Di isi",
-                                                    'is_unique' => '%s Sudah Di gunakan'
-                                                )
-                                            );
-            $this->form_validation->set_rules('deskripsi_sapras','Deskripsi Sarana & Prasarana', 'required');
-            if ($this->form_validation->run() == TRUE) {
+        public function add()
+    {         
+        $this->form_validation->set_rules('nama_sapras','Nama Sarana & Prasarana', 
+                                            'required|is_unique[sapras.nama_sapras]',
+                                            array(
+                                                'required' => "Sarana Dan Prasarana Wajib Di isi",
+                                                'is_unique' => '%s Sudah Di gunakan'
+                                            )
+                                        );
+        $this->form_validation->set_rules('deskripsi_sapras','Deskripsi Sarana & Prasarana', 'required');
+        if ($this->form_validation->run() == TRUE) {
 
-                $config['upload_path'] = './sampul/';
-                $config['allowed_types']        = 'gif|jpg|png|jpeg';
-                $config['max_size']             = 50000;
-                $this->upload->initialize($config);
+            $config['upload_path'] = './sampul/';
+            $config['allowed_types']        = 'gif|jpg|png|jpeg';
+            $config['max_size']             = 50000;
+            $this->upload->initialize($config);
+            if (!$this->upload->do_upload('foto_sapras'))
+            {
+                $data = array(                
+                    'title' => 'Input Data Sarana & Prasarana',
+                    'error_upload' => $this->upload->display_errors(),
+                    'isi'=> 'admin/sapras/v_add'  
+                );
+                $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+                return;
+            }
+            else
+            {
+                $upload_data = array('uploads' => $this->upload->data());
+                $config = array('uploads' => $this->upload->data());
+                $config ['image_library'] = 'gd2';
+                $config ['source_image'] = './sampul/'.$upload_data['uploads']['file_name'];
+                $this->load->library('image_lib', $config);
+
+                $data = array(
+                    'nama_sapras'        => $this->input->post('nama_sapras'),   
+                    'deskripsi_sapras'        => $this->input->post('deskripsi_sapras'),   
+                    'foto_sapras'    => $upload_data['uploads']['file_name'],
+                    'id_user'           =>  $this->session->userdata('id_user')
+                    );
+                $this->m_sapras->add($data);
+                $this->session->set_flashdata('pesan', 'Data Berhasil Disimpan');
+                redirect('sapras');
+            }
+        } 
+        
+        $data = array(
+            'title' => 'Tambah Data Sarana & Prasarana', 
+            'sapras' => $this->m_sapras->lists(),
+            'isi'  => 'admin/sapras/v_add'
+        );
+        $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+
+    }
+    
+        public function edit($id_sapras)
+    {
+        $this->form_validation->set_rules('nama_sapras','Nama Sarana & Prasarana', 'required');
+        $this->form_validation->set_rules('deskripsi_sapras','Deskripsi Sarana & Prasarana', 'required');
+        // $this->form_validation->set_rules('foto_sapras','Foto Sarana & Prasarana', 'required');
+
+        
+        if ($this->form_validation->run() == TRUE) {
+            $config['upload_path'] = './sampul/';
+            $config['allowed_types']        = 'gif|jpg|png|jpeg';
+            $config['max_size']             = 2000;
+            $this->upload->initialize($config);
                 if (!$this->upload->do_upload('foto_sapras'))
                 {
-                    $data = array(                
-                        'title' => 'Input Data Sarana & Prasarana',
-                        'error_upload' => $this->upload->display_errors(),
-                        'isi'=> 'admin/sapras/v_add'  
-                    );
-                    $this->load->view('admin/layout/v_wrapper', $data, FALSE);
-                    return;
+                        $data = array(                
+                            'title' => ' Edit Data Sarana & Prasarana', 
+                            'error_upload' => $this->upload->display_errors(),
+                            'sapras' => $this->m_sapras->detail($id_sapras),
+                            'isi'  => 'admin/sapras/v_edit'
+                        );
+                        $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+                        return;
                 }
                 else
                 {
-                    $upload_data = array('uploads' => $this->upload->data());
-                    $config = array('uploads' => $this->upload->data());
-                    $config ['image_library'] = 'gd2';
-                    $config ['source_image'] = './sampul/'.$upload_data['uploads']['file_name'];
-                    $this->load->library('image_lib', $config);
+                        $upload_data = array('uploads' => $this->upload->data());
+                        $config = array('uploads' => $this->upload->data());
+                        $config ['image_library'] = 'gd2';
+                        $config ['source_image'] = './sampul/'.$upload_data['uploads']['file_name'];
+                        $this->load->library('image_lib', $config);
+                        //menghapus file photo lama
+                        $sapras=$this->m_sapras->detail($id_sapras);
+                        if ($sapras->foto_sapras !="") {
+                            unlink('./sampul/'.$sapras->foto_sapras);
+                        }
+                        //end menghapus photo lama
+                        $data = array(
+                            'id_sapras'       =>$id_sapras,
+                            'nama_sapras'    => $this->input->post('nama_sapras'),
+                            'deskripsi_sapras'    => $this->input->post('deskripsi_sapras'),
+                            'foto_sapras'    => $upload_data['uploads']['file_name'],
+                            'id_user'           =>  $this->session->userdata('id_user')
+                            );
 
-                    $data = array(
-                        'nama_sapras'        => $this->input->post('nama_sapras'),   
-                        'deskripsi_sapras'        => $this->input->post('deskripsi_sapras'),   
-                        'foto_sapras'    => $upload_data['uploads']['file_name'],
-                        'id_user'           =>  $this->session->userdata('id_user')
-                        );
-                    $this->m_sapras->add($data);
-                    $this->session->set_flashdata('pesan', 'Data Berhasil Disimpan');
+                    $this->m_sapras->edit($data);
+                    $this->session->set_flashdata('pesan', 'Data Berhasil Diedit');
                     redirect('sapras');
                 }
-            } 
-            
-            $data = array(
-                'title' => 'Tambah Data Sarana & Prasarana', 
-                'sapras' => $this->m_sapras->lists(),
-                'isi'  => 'admin/sapras/v_add'
-            );
-            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
 
-        }
-        
-         public function edit($id_sapras)
-        {
-            $this->form_validation->set_rules('nama_sapras','Nama Sarana & Prasarana', 'required');
-            $this->form_validation->set_rules('deskripsi_sapras','Deskripsi Sarana & Prasarana', 'required');
-            // $this->form_validation->set_rules('foto_sapras','Foto Sarana & Prasarana', 'required');
+                $upload_data = array('uploads' => $this->upload->data());
+                $config = array('uploads' => $this->upload->data());
+                $config ['image_library'] = 'gd2';
+                $config ['source_image'] = './sampul/'.$upload_data['uploads']['file_name'];
+                $this->load->library('image_lib', $config);
 
-            
-            if ($this->form_validation->run() == TRUE) {
-               $config['upload_path'] = './sampul/';
-               $config['allowed_types']        = 'gif|jpg|png|jpeg';
-               $config['max_size']             = 2000;
-               $this->upload->initialize($config);
-                    if (!$this->upload->do_upload('foto_sapras'))
-                    {
-                            $data = array(                
-                                'title' => ' Edit Data Sarana & Prasarana', 
-                                'error_upload' => $this->upload->display_errors(),
-                                'sapras' => $this->m_sapras->detail($id_sapras),
-                                'isi'  => 'admin/sapras/v_edit'
-                            );
-                            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
-                            return;
-                    }
-                    else
-                    {
-                            $upload_data = array('uploads' => $this->upload->data());
-                            $config = array('uploads' => $this->upload->data());
-                            $config ['image_library'] = 'gd2';
-                            $config ['source_image'] = './sampul/'.$upload_data['uploads']['file_name'];
-                            $this->load->library('image_lib', $config);
-                            //menghapus file photo lama
-                            $sapras=$this->m_sapras->detail($id_sapras);
-                            if ($sapras->foto_sapras !="") {
-                                unlink('./sampul/'.$sapras->foto_sapras);
-                            }
-                            //end menghapus photo lama
-                            $data = array(
-                                'id_sapras'       =>$id_sapras,
-                                'nama_sapras'    => $this->input->post('nama_sapras'),
-                                'deskripsi_sapras'    => $this->input->post('deskripsi_sapras'),
-                                'foto_sapras'    => $upload_data['uploads']['file_name'],
-                                'id_user'           =>  $this->session->userdata('id_user')
-                                );
+                $data = array(
+                            'id_sapras'       =>$id_sapras,
+                            'nama_sapras'    => $this->input->post('nama_sapras'),
+                            'deskripsi_sapras'    => $this->input->post('deskripsi_sapras'),
+                            'foto_sapras'    => $this->input->post('foto_sapras'),
+                            'id_user'           =>  $this->session->userdata('id_user')
+                    );
 
-                        $this->m_sapras->edit($data);
-                        $this->session->set_flashdata('pesan', 'Data Berhasil Diedit');
-                        redirect('sapras');
-                    }
+                    $this->m_sapras->edit($data);
+                    $this->session->set_flashdata('pesan', 'Data Berhasil Diedit');
+                    redirect('sapras');
+        } 
 
-                    $upload_data = array('uploads' => $this->upload->data());
-                    $config = array('uploads' => $this->upload->data());
-                    $config ['image_library'] = 'gd2';
-                    $config ['source_image'] = './sampul/'.$upload_data['uploads']['file_name'];
-                    $this->load->library('image_lib', $config);
-
-                    $data = array(
-                                'id_sapras'       =>$id_sapras,
-                                'nama_sapras'    => $this->input->post('nama_sapras'),
-                                'deskripsi_sapras'    => $this->input->post('deskripsi_sapras'),
-                                'foto_sapras'    => $this->input->post('foto_sapras'),
-                                'id_user'           =>  $this->session->userdata('id_user')
-                        );
-
-                        $this->m_sapras->edit($data);
-                        $this->session->set_flashdata('pesan', 'Data Berhasil Diedit');
-                        redirect('sapras');
-            } 
-
-            $data = array(
-                'title' => 'Edit Data Sarana & Prasarana',                
-                'sapras' => $this->m_sapras->detail($id_sapras),
-                'isi'  => 'admin/sapras/v_edit'
-            );
-            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
-        }
+        $data = array(
+            'title' => 'Edit Data Sarana & Prasarana',                
+            'sapras' => $this->m_sapras->detail($id_sapras),
+            'isi'  => 'admin/sapras/v_edit'
+        );
+        $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+    }
 
 
-        public function delete($id_sapras)
-        {
+    public function delete($id_sapras)
+    {
 
-             //menghapus file photo lama
-             $sapras=$this->m_sapras->detail($id_sapras);
-             if ($sapras->foto_sapras !="") {
-                 unlink('./sampul/'.$sapras->foto_sapras);
-             }
-             //end menghapus photo lama
-            $data = array(
-                'id_sapras' => $id_sapras,
-            );
-            $this->m_sapras->delete($data);
-            $this->session->set_flashdata('pesan', 'Data Berhasil Dihapus!!!');        
-            redirect('sapras');
-        }
+            //menghapus file photo lama
+            $sapras=$this->m_sapras->detail($id_sapras);
+            if ($sapras->foto_sapras !="") {
+                unlink('./sampul/'.$sapras->foto_sapras);
+            }
+            //end menghapus photo lama
+        $data = array(
+            'id_sapras' => $id_sapras,
+        );
+        $this->m_sapras->delete($data);
+        $this->session->set_flashdata('pesan', 'Data Berhasil Dihapus!!!');        
+        redirect('sapras');
+    }
 
 
     public function cetak()
@@ -229,7 +229,8 @@ public function __construct()
 		$writer->openToBrowser($file_path);
 		//silahkan sobat sesuaikan dengan data yang ingin sobat tampilkan
 
-		$label = ['LAPORAN DATA SARANA DAN PRASARANA'];
+		$label1 = ['Laporan Data Sarana Dan Prasarana'];
+        $label2 = ['Masjid Al Barqah'];
 		$spasi1 = [''];
 		$spasi2 = [''];
 		$spasi3 = [''];
@@ -240,7 +241,8 @@ public function __construct()
 		];
 
 
-		$writer->addRow($label);
+		$writer->addRow($label1);
+		$writer->addRow($label2);
 		$writer->addRow($spasi1);
 		$writer->addRow($spasi2);
 		$writer->addRow($spasi3);

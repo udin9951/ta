@@ -19,11 +19,11 @@ class Cetak_user extends CI_Controller {
 			$no = 1;
 			foreach ($user as $value) {
 				$data .= "<tr>
-						<td>".$no++."</td>
-						<td>".$value->nama_user."</td>
-						<td>".$value->username."</td>
-						<td>".$value->nama_level."</td>
-						<td>".$value->foto_user."</td>
+						<td style='text-align : center;'>".$no++."</td>
+						<td style='text-align : center;'>".$value->nama_user."</td>
+						<td style='text-align : center;'>".$value->username."</td>
+						<td style='text-align : center;'>".$value->nama_level."</td>
+						<td style='text-align : center;'>".$value->foto_user."</td>
 				</tr>
 				";
 			}
@@ -91,7 +91,7 @@ class Cetak_user extends CI_Controller {
 						<th width='100px'>
 							<center>Level</center>
 						</th>		
-						<th width='100px'>
+						<th width='310px'>
 							<center>Foto</center>
 						</th>		
 					</tr>

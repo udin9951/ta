@@ -10,9 +10,6 @@
             </div>
             
             <a href="<?= base_url('user/add'); ?>"class="btn btn-primary"> <i class="fa fa-plus"></i>Tambah Data</a>
-            <a href="<?= base_url('user/export'); ?>"class="btn btn-success" target="_BLANK"> <i class="fa-solid fa-file-excel"></i>Export Excel</a>
-            <a href="<?= base_url('user/cetak'); ?>"class="btn btn-warning"  target="_BLANK"> <i class="fa fa-file"></i>Export PDF</a>
-            <a href="<?= base_url('cetak_user'); ?>"class="btn btn-danger" target="_BLANK"> <i class="fa fa-print"></i>Print</a>
             <div class="x_content">
                 <div class="row">
                     <div class="col-sm-12">
