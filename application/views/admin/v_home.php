@@ -31,7 +31,7 @@
                     <div class="card-body">
                       <div class="alert alert-info alert-dismissible">
                           <h5>
-                          <i class="fa fa-info"></i> Total Saldo Akhir</h5>
+                          <i class="fa fa-info"></i> Total Saldo Kas Senin Kamis</h5>
                           <h2><b><?= "Rp " . number_format($total_kas_masuk->kas_masuk - $total_kas_keluar->kas_keluar,2,',','.'); ?></b></h2>
                       </div>
                     </div>

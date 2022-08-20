@@ -60,8 +60,9 @@
                 }
                 ?>
                 <h3>
-                    <center>Laporan Penerimaan dan Pengeluaran Dana<br>
-                    Masjid Al-Barqah</center>
+                    <center>Laporan Infaq Senin Kamis<br>
+                    Masjid Al-Barqah<br>
+                </center>
                 </h3>
                 <hr>
                     <?php echo form_open_multipart('home/rekap'); ?>
@@ -82,7 +83,7 @@
                                 <div class="form-group">
                                     <label for="type">Jenis</label>
                                     <br>
-                                    <select class="form-control" name="type" id="type">
+                                    <select style="display: block !important;" class="form-control" name="type" id="kota">
                                         <option value="">Select All</option>
                                         <option value="Masuk" <?= $type == "Masuk" ? "Selected" : "" ?>>Kas Masuk</option>
                                         <option value="Keluar" <?= $type == "Keluar" ? "Selected" : "" ?>>Kas Keluar</option>

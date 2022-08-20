@@ -21,10 +21,30 @@ class M_home extends CI_Model {
         return $this->db->get()->result();
     }
 
-    public function pengurus()
+    public function pengurus($filter = NULL)
     {
         $this->db->select('*');
-        $this->db->from('pengurus');            
+        $this->db->from('pengurus');
+        if(!empty($filter))
+        {
+            $this->db->where('type', $filter);
+
+            if($filter == "Bidang Bidang")
+            {
+                $this->db->group_by('jabatan_pengurus'); 
+            }
+        }
+        $this->db->order_by('no_urut', 'asc');
+        return $this->db->get()->result();
+    }
+
+    public function anggota_pengurus($filter, $jabatan)
+    {
+        $this->db->select('*');
+        $this->db->from('pengurus');
+        $this->db->where('jabatan_pengurus', $jabatan);
+        $this->db->where('type', $filter);
+
         $this->db->order_by('no_urut', 'asc');
         return $this->db->get()->result();
     }
@@ -239,7 +259,16 @@ class M_home extends CI_Model {
         $this->db->limit(2);
         return $this->db->get()->result();
     }
-        
+    
+    public function laporan()
+    {
+        $this->db->select('*');
+        $this->db->from('laporan');  
+        $this->db->join('user', 'user.id_user = laporan.user', 'left');       
+        $this->db->order_by('id', 'desc');
+        $this->db->limit(1);
+        return $this->db->get()->row();
+    }
 }
 
 /* End of file M_Home.php */

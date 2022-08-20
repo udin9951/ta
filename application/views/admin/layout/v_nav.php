@@ -46,11 +46,12 @@
                 if(!in_array($this->session->userdata('level'), [2] ))
                 {
               ?>
-              <li><a><i class="fa fa-book"></i>Kas Masjid<span class="fa fa-chevron-down"></span></a>
+              <li><a><i class="fa fa-book"></i>Laporan Ke Uangan<span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="<?= base_url('kas_masuk')?>">Kas Masuk</a></li>
-                  <li><a href="<?= base_url('kas_keluar')?>">Kas Keluar</a></li>  
-                  <li><a href="<?= base_url('rekap')?>">Rekap Kas Masjid</a></li>  
+                  <li><a href="<?= base_url('kas_masuk')?>">Kas Infaq Masuk</a></li>
+                  <li><a href="<?= base_url('kas_keluar')?>">Kas Infaq Keluar</a></li>  
+                  <li><a href="<?= base_url('rekap')?>">Rekap Kas Infaq Senin Kamis</a></li>  
+                  <li><a href="<?= base_url('laporan')?>">Laporan Kuangan Masjid</a></li>  
                 </ul>
               </li> 
 

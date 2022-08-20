@@ -120,9 +120,27 @@ class Home extends CI_Controller {
 
 	public function pengurus()
 	{
+		$bidang = $this->m_home->pengurus('Bidang Bidang');
+		$anggota_bidang = [];
+
+		foreach ($bidang as $key => $value) {
+			$data = $this->m_home->anggota_pengurus('Bidang Bidang', $value->jabatan_pengurus);
+
+			foreach ($data as $key => $a) {
+				$anggotaItem['jabatan'] = $a->jabatan_pengurus;
+				$anggotaItem['nama'] = $a->nama_pengurus;
+				$anggotaItem['title'] = $a->title;
+
+				array_push($anggota_bidang, $anggotaItem);
+			}
+		}
+
 		$data = array(
 			'title' => 'Pengurus',
-			'pengurus' => $this->m_home->pengurus(),
+			'penasihat' => $this->m_home->pengurus('Penasihat'),
+			'pengurus' => $this->m_home->pengurus('Pengurus Harian'),
+			'bidang' => $this->m_home->pengurus('Bidang Bidang'),
+			'anggota' => $anggota_bidang,
 			'isi'=> 'v_pengurus' 
 			);
 		$this->load->view('layout/v_wrapper', $data, FALSE);
@@ -276,6 +294,16 @@ class Home extends CI_Controller {
 			'total_kas' => $total_kas,
 			'rekap' => $this->m_home->rekap_kas($filter_start, $filter_end ,$type),
 			'isi'=> 'v_rekap' 
+			);
+		$this->load->view('layout/v_wrapper', $data, FALSE);
+	}
+
+	public function laporan()
+	{
+		$data = array(
+			'title' => 'Laporan',
+			'laporan' => $this->m_home->laporan(),
+			'isi'=> 'v_laporan' 
 			);
 		$this->load->view('layout/v_wrapper', $data, FALSE);
 	}

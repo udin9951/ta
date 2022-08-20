@@ -12,7 +12,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="<?= 'gambar/'.$this->session->userdata('foto')?>" alt="..." class="img-circle profile_img">
+                <img src="<?= base_url().'/gambar/'.$this->session->userdata('foto')?>" alt="..." class="img-circle profile_img">
               </div>
                 <div class="profile_info mt-3">
                   <h2> <?= $this->session->userdata('nama_user');?></h2>

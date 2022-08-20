@@ -30,14 +30,18 @@
                                         <ul class="dropdown" style="background: #ffe000ed;">
                                             <li><a href="<?= base_url('home/kegiatan') ?>">Jadwal Kegiatan</a></li>
                                             <li><a href="<?= base_url('home/pengajian') ?>">Jadwal Pengajian</a></li>
-                                            <li><a href="<?= base_url('home/salat') ?>">Jadwal Salat</a></li>
                                             <li><a href="<?= base_url('home/soljum') ?>">Jadwal Salat Jumat</a></li>
                                         </ul>
                                     </li>
                                     <li class="<?= $uri == "galeri"  ? "active" :""  ?>"><a href="<?= base_url('home/galeri') ?>">Galeri</a></li>
                                     <li class="<?= $uri == "channel"  ? "active" :""  ?>"><a href="<?= base_url('home/channel') ?>">Al-Barqah Channel</a></li>
                                     <li class="<?= $uri == "berita"  ? "active" :""  ?>"><a href="<?= base_url('home/berita') ?>">Artikel</a></li>
-                                    <li class="<?= $uri == "rekap"  ? "active" :""  ?>"><a href="<?= base_url('home/rekap') ?>">Kas Masjid</a></li>
+                                    <li class="<?= in_array($uri, ['rekap','laporan'])  ? "active" :""  ?>"><a href="#">Kas Masjid</a>
+                                        <ul class="dropdown" style="background: #ffe000ed;">
+                                            <li><a href="<?= base_url('home/rekap') ?>">Kas Infaq Senin Kamis</a></li>
+                                            <li><a href="<?= base_url('home/laporan') ?>">Laporan Keuangan Masjid</a></li>
+                                        </ul>
+                                    </li>
                                     <li class="<?= $uri == "contact"  ? "active" :""  ?>"><a href="<?= base_url('home/contact') ?>">Kontak</a></li>
                                 </ul>
                             </nav>

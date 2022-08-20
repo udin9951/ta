@@ -31,7 +31,7 @@
     <script>
         JavaScriptGallery.enableExtraButtons();
         JavaScriptGallery.initGallery();
-        $('#kota').select2()
+        $('#kota').select2();
 
         $(document).ready(function(){
             $('#kota').change(function(){
