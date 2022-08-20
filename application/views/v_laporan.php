@@ -15,7 +15,7 @@
 
     <!-- Home About Section Begin -->
     <section class="home-about">
-        <div class="container">
+        <div class="container bare-minimum">
             <div class="row">
                 <!-- <div class="col-lg-6">
                     <div class="home__about__text">

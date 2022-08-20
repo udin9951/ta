@@ -1,6 +1,6 @@
  <!-- Contact Section Begin -->
     <section class="contact spad">
-        <div class="container">
+        <div class="container bare-minimum">
             <div class="row">
                 <div class="col-lg-5 col-md-6 col-sm-5">
                     <div class="contact__widget">

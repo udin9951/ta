@@ -1,6 +1,6 @@
  <!-- About Section Begin -->
     <section class="about spad">
-        <div class="container">
+        <div class="container bare-minimum">
             <div class="about__content">
                 <div class="row">
                     <div class="col-lg-5">

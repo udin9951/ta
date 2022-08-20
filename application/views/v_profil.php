@@ -2,7 +2,7 @@
     </div>
  <section class="rooms spad">
 
-        <div class="container">
+        <div class="container bare-minimum">
             <div class="row">
                 
                 <!-- <div class="col-lg-6 p-0 order-lg-3 order-md-3 col-md-6">

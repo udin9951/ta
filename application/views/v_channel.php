@@ -1,6 +1,6 @@
 <!-- Blog Section Begin -->
 <section class="padding ptb-xs-40">
-    <div class="container">
+    <div class="container bare-minimum">
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 <div class="headeing pb-30">

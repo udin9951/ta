@@ -1,6 +1,6 @@
 <!-- Blog Section Begin -->
     <section class="blog spad">
-        <div class="container">
+        <div class="container bare-minimum">
             <div class="row">
                 <div class="col-12">
                     <div class="row">

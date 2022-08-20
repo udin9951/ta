@@ -15,7 +15,7 @@
 
     <!-- Services Section Begin -->
     <section class="services spad">
-        <div class="container">
+        <div class="container bare-minimum">
             <div class="card-box table-responsive">
                 <?php
                         if ($this->session->flashdata('pesan')) {
