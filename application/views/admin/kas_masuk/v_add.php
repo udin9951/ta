@@ -29,9 +29,9 @@
             </div>
 
              <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align">Jumlah Pemasukan</label>
+                <label class="col-form-label col-md-3 col-sm-3 label-align">Jumlah Penerimaan</label>
                 <div class="col-md-6 col-sm-6 ">
-                    <input class="form-control" type="text" name="kas_masuk" placeholder="Jumlah Pemasukan" >
+                    <input class="form-control" type="text" name="kas_masuk" placeholder="Jumlah Penerimaan" >
                 </div>
             </div>
 

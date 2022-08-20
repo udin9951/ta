@@ -40,7 +40,7 @@
                                 <th>No</th>
                                 <th class="text-center">Nama Pengurus</th>
                                 <th class="text-center">Jabatan Pengurus</th>
-                                <th class="text-center">Foto Pengurus</th>
+                                <th class="text-center">Type</th>
                                 <th class="text-center">User</th>               
                                 <th class="text-center">Aksi</th>
                                 </tr>
@@ -53,7 +53,7 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $value->nama_pengurus?> </td>
                                 <td><?= $value->jabatan_pengurus?> </td>
-                                <td> <img src="<?= base_url('sampul/'. $value->foto_pengurus) ?>" width="150px"> </td>
+                                <td><?= $value->type?> </td>
                                 <td><?= $value->nama_user?></td>
                                 <td>
                                 <a href="<?= base_url('pengurus/edit/'.$value->id_pengurus)?>" class ="btn btn-xs btn-primary"> <i class="fa fa-pencil"> </i></a>

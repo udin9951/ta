@@ -13,7 +13,7 @@ class penceramah extends CI_Controller {
     public function index()
         {
             $data = array(
-                'title' => 'Data Penceramah', 
+                'title' => 'Data Ustadz', 
                 'penceramah' => $this->M_penceramah->lists(),
                 'isi'  => 'admin/penceramah/v_list'
             );
@@ -27,7 +27,7 @@ class penceramah extends CI_Controller {
             $this->form_validation->set_rules('nama_penceramah', 'Nama Penceramah ', 'required');   
             if ($this->form_validation->run() == FALSE) {
                 $data = array(
-                    'title' => 'Tambah Data Penceramah', 
+                    'title' => 'Tambah Data Ustadz', 
                     'isi'  => 'admin/penceramah/v_add'
                 );
                 $this->load->view('admin/layout/v_wrapper', $data, FALSE);
@@ -50,7 +50,7 @@ class penceramah extends CI_Controller {
             $this->form_validation->set_rules('nama_penceramah', 'Nama penceramah ', 'required'); 
             if ($this->form_validation->run() == FALSE) {
                 $data = array(
-                    'title' => 'Tambah Data Penceramah', 
+                    'title' => 'Tambah Data Ustadz', 
                     'penceramah' => $this->M_penceramah->detail($id_penceramah),
                     'isi'  => 'admin/penceramah/v_edit'
                 );

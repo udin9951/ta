@@ -27,7 +27,7 @@
                             <thead>
                                 <tr>
                                 <th>No</th>
-                                <th class="text-center">Nama Imam</th>
+                                <th class="text-center">Nama Khatib</th>
                                <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>

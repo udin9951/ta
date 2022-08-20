@@ -27,7 +27,7 @@
                             <thead>
                                 <tr>
                                 <th>No</th>
-                                <th class="text-center">Nama Penceramah</th>
+                                <th class="text-center">Nama Ustadz</th>
                                 <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>

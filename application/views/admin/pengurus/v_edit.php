@@ -26,17 +26,6 @@
                 <input type="text" value ="<?= $pengurus->nama_pengurus?>" name = "nama_pengurus" required="required" placeholder="Nama Pengurus" class="form-control ">
                 </div>
             </div>
-            
-            <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align"> Foto Pengurus <span class="required"></span>
-                </label>
-                <div class="col-md-6 col-sm-6 ">
-                    <img src="<?= base_url('sampul/'.$pengurus->foto_pengurus) ?>" width="100px" alt="">
-                    <input type="file" value ="<?= $pengurus->foto_pengurus?>" name = "foto_pengurus" required="required" placeholder="Foto Pengurus" class="form-control ">
-                </div>
-            </div>
-
-
 
             <div class="ln_solid"></div>
             <div class="item form-group">

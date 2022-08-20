@@ -15,7 +15,7 @@
                     <div class="alert alert-info alert-dismissible">
                         <h5>
                             <i class="icon fa fa-info"></i> Saldo Kas Masjid</h5>
-                        <h5>Pemasukan :
+                        <h5>Penerimaan :
                         <?= "Rp " . number_format($total_kas_masuk->kas_masuk,2,',','.'); ?></h5>
 
                         <h5>Pengeluaran :

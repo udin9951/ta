@@ -3,7 +3,7 @@
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Tambah Data Penceramah</h2>
+                <h2>Tambah Data Ustadz</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -16,10 +16,10 @@
               echo form_open_multipart('penceramah/add'); ?>
 
             <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align">Nama Penceramah<span class="required"></span>
+                <label class="col-form-label col-md-3 col-sm-3 label-align">Nama Ustadz<span class="required"></span>
                 </label>
                 <div class="col-md-6 col-sm-6 ">
-                <input type="text" name = "nama_penceramah" required="required" placeholder="Nama Penceramah" class="form-control ">
+                <input type="text" name = "nama_penceramah" required="required" placeholder="Nama Ustadz" class="form-control ">
                 </div>
             </div>
             <div class="ln_solid"></div>

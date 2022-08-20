@@ -37,6 +37,45 @@
                 </div>
 
                 <div class="item form-group">
+                    <label class="col-form-label col-md-3 col-sm-3 label-align">Type <span class="required"></span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 ">
+                        <select class="form-control " name="type_pengurus" id="type_pengurus">
+                            <option value="">Pilih</option>
+                            <option value="Penasihat">Penasihat</option>
+                            <option value="Pengurus Harian">Pengurus Harian</option>
+                            <option value="Bidang Bidang">Bidang Bidang</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item form-group bidang_pengurus" style="display: none;">
+                    <label class="col-form-label col-md-3 col-sm-3 label-align">Jabatan Bidang <span class="required"></span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 ">
+                        <select class="form-control " name="type_bidang" id="type_bidang">
+                            <option value="">Pilih</option>
+                            <option value="Ta'mir dan Dakwah">Ta'mir dan Dakwah</option>
+                            <option value="Perlengkapan dan Pemeliharaan">Perlengkapan dan Pemeliharaan</option>
+                            <option value="Pendidikan & Kewanitaan">Pendidikan & Kewanitaan</option>
+                            <option value="Ambulan & Pemulasaran">Ambulan & Pemulasaran</option>
+                            <option value="Remaja Masjid">Remaja Masjid</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="item form-group bidang_pengurus" style="display: none;">
+                    <label class="col-form-label col-md-3 col-sm-3 label-align">Ketua ? <span class="required"></span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 ">
+                        <select class="form-control " name="bidang_ketua" id="bidang_ketua">
+                            <option value="">Pilih</option>
+                            <option value="1">Ya</option>
+                            <option value="0">Tidak</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="item form-group" style="display: none;" id="jabatan_pengurus">
                     <label class="col-form-label col-md-3 col-sm-3 label-align"> Jabatan Pengurus <span class="required"></span>
                     </label>
                     <div class="col-md-6 col-sm-6 ">
@@ -52,14 +91,6 @@
                         </select>
                     </div>
                 </div>
-                <div class="item form-group">
-                    <label class="col-form-label col-md-3 col-sm-3 label-align"> Foto Pengurus <span class="required"></span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 ">
-                    <input type="file" name = "foto_pengurus" required="required" placeholder="Foto Pengurus" class="form-control ">
-                    </div>
-                </div>
-
                 <div class="ln_solid"></div>
                 <div class="item form-group">
                     <div class="col-md-6 col-sm-6 offset-md-3">

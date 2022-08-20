@@ -6,7 +6,7 @@
             <ul class="nav side-menu">
               <li><a href="<?= base_url('admin')?>"><i class="fa fa-home"></i> Dashboard <span class="label label-success pull-right"></span></a></li>
               <?php
-                if($this->session->userdata('level') != 4)
+                if(!in_array($this->session->userdata('level'), [4,3]))
                 {
 
               ?>
@@ -16,6 +16,10 @@
                   <li><a href="<?= base_url('sapras')?>">Sarana & Prasarana</a></li>  
                 </ul>
               </li>       
+              <?php }
+              if(!in_array($this->session->userdata('level'), [4]))
+              {
+              ?>
               <li><a><i class="fa fa-calendar-check-o"></i>Agenda<span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                   <li><a href="<?= base_url('kegiatan')?>">Jadwal Kegiatan</a></li>
@@ -29,7 +33,7 @@
 
               <?php
                 }
-                if(!in_array($this->session->userdata('level'), [3,4]))
+                if(!in_array($this->session->userdata('level'), [4]))
                 {
 
               ?>
@@ -43,13 +47,13 @@
 
               <?php
                 }
-                if(!in_array($this->session->userdata('level'), [2] ))
+                if(!in_array($this->session->userdata('level'), [2,3] ))
                 {
               ?>
               <li><a><i class="fa fa-book"></i>Laporan Ke Uangan<span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="<?= base_url('kas_masuk')?>">Kas Infaq Masuk</a></li>
-                  <li><a href="<?= base_url('kas_keluar')?>">Kas Infaq Keluar</a></li>  
+                  <li><a href="<?= base_url('kas_masuk')?>">Kas Infaq Penerimaan</a></li>
+                  <li><a href="<?= base_url('kas_keluar')?>">Kas Infaq Pengeluaran</a></li>  
                   <li><a href="<?= base_url('rekap')?>">Rekap Kas Infaq Senin Kamis</a></li>  
                   <li><a href="<?= base_url('laporan')?>">Laporan Kuangan Masjid</a></li>  
                 </ul>

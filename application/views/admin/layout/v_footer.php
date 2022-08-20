@@ -58,6 +58,20 @@
 
   $(document).ready(function() {
     $('#example').DataTable();
+
+    $('#type_pengurus').on('change', function() {
+      if (this.value == 'Pengurus Harian') {
+        $('#jabatan_pengurus').show();
+        $('.bidang_pengurus').hide();
+      } else if (this.value == 'Bidang Bidang'){
+        $('#jabatan_pengurus').hide();
+        $('.bidang_pengurus').show();
+      }
+      else if (this.value == 'Penasihat'){
+        $('#jabatan_pengurus').hide();
+        $('.bidang_pengurus').hide();
+      }
+    });
 } );
 </script>
    

@@ -13,7 +13,7 @@ class imam extends CI_Controller {
     public function index()
         {
             $data = array(
-                'title' => 'Data Imam', 
+                'title' => 'Data Khatib', 
                 'imam' => $this->M_imam->lists(),
                 'isi'  => 'admin/imam/v_list'
             );
@@ -27,7 +27,7 @@ class imam extends CI_Controller {
             $this->form_validation->set_rules('nama_imam', 'Nama Imam ', 'required');   
             if ($this->form_validation->run() == FALSE) {
                 $data = array(
-                    'title' => 'Tambah Data Imam', 
+                    'title' => 'Tambah Data Khatib', 
                     'isi'  => 'admin/imam/v_add'
                 );
                 $this->load->view('admin/layout/v_wrapper', $data, FALSE);
@@ -50,7 +50,7 @@ class imam extends CI_Controller {
             $this->form_validation->set_rules('nama_imam', 'Nama Imam ', 'required');   
             if ($this->form_validation->run() == FALSE) {
                 $data = array(
-                    'title' => 'Tambah Data Imam', 
+                    'title' => 'Tambah Data Khatib', 
                     'imam' => $this->M_imam->detail($id_imam),
                     'isi'  => 'admin/imam/v_edit'
                 );
