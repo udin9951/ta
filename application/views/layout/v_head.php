@@ -26,9 +26,9 @@
         .nice-select {
             display: none;
         }
-        /* .bare-minimum{
-            min-height: 580px;
-        } */
+        .bare-minimum{
+            min-height: 850px;
+        }
     </style>
 </head>
 

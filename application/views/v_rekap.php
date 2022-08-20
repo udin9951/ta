@@ -15,7 +15,7 @@
 
     <!-- Home About Section Begin -->
     <section class="home-about">
-        <div class="container">
+        <div class="container" style="max-height: 800px;">
             <div class="row">
                 <!-- <div class="col-lg-6">
                     <div class="home__about__text">
@@ -40,7 +40,7 @@
     <!-- Home About Section End -->
 
     <!-- Services Section Begin -->
-    <section class="services spad">
+    <section class="services spad mt-5">
         <div class="container">
             <div class="card-box table-responsive">
                 <?php

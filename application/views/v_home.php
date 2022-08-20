@@ -46,7 +46,7 @@
 <section class="services spad" style="margin :10px;margin-top : 20px;">
     <div class="container">
       <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-6">
           <div class="container" text align="justify">
             <h2>Profil Masjid Al-Barqah</h2>&nbsp;
             <p>Masjid Al-Barqah merupakan masjid yang berlokasi di Komplek Kayu Tangi II Rt. 15 Jl. H. Hasan Basri Kecamatan Banjarmasin Utara, 
@@ -68,8 +68,7 @@
       <br>
       <br>
       <div class="row">
-        <div class="col-md-4"></div>
-        <div class="card text-center" style="width: 50%;">
+        <div class="card text-center  mx-auto d-block" style="width: 50%;">
           <div class="card-header">
             <center>
             <?php

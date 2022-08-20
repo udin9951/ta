@@ -18,7 +18,7 @@
 											<div class="form-group">
 												<label for="type">Pilih Hari</label>
 												<br>
-												<select class="form-control" name="hari" id="hari">
+												<select class="form-control" name="hari" id="kota">
 													<option value="">Select All</option>
 													<option value="Senin" <?= $hari == "Senin" ? "Selected" : "" ?>>Senin</option>
 													<option value="Selasa" <?= $hari == "Selasa" ? "Selected" : "" ?>>Selasa</option>

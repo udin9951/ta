@@ -62,13 +62,12 @@
                 <h3>
                     <center>Laporan Penerimaan dan Pengeluaran Dana<br>
                     Masjid Al-Barqah<br>
-                    <h3 class="text-primary">Periode Bulan <?= DateTime::createFromFormat('Y-m', $laporan->periode)->format('F'); ?> 2022</h3>
+                    <h3>Periode Bulan <?= DateTime::createFromFormat('Y-m', $laporan->periode)->format('F'); ?> 2022</h3>
                 </center>
                 </h3>
                 <center>
-                    <div class="row d-flex Gallery mt-3" style="margin-bottom :0px !important;">
-                        <div class="col-md-4"></div>
-                        <div class="services__item card">
+                    <div class="row d-flex Gallery mt-3 " style="margin-bottom :0px !important;">
+                        <div class="services__item card mx-auto d-block">
                             <img style="max-width: 600px !important; max-height: 800px !important;" class="w-100 img-thumbnail" src="<?= file_exists(FCPATH.'/gambar/'. $laporan->foto_laporan) ? base_url('gambar/'. $laporan->foto_laporan) : "https://via.placeholder.com/300x300.png/001177?text=$laporan->foto_laporan"; ?>">
                         </div>
                     </div>

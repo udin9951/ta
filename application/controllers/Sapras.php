@@ -179,22 +179,22 @@ public function __construct()
 
     public function cetak()
     {
-        error_reporting(0); // AGAR ERROR MASALAH VERSI PHP TIDAK MUNCUL
+        // error_reporting(0); // AGAR ERROR MASALAH VERSI PHP TIDAK MUNCUL
         $pdf = new FPDF('P', 'mm','A4');
         $pdf->AddPage();
         $pdf->Image('./icon/logo_.png',10,10,70,25);
         $pdf->Cell(50);
-        $pdf->SetFont('Times','B','20');
+        $pdf->SetFont('Times','B','10');
         $pdf->Cell(0,5,'Pengurus Masjid Al-Barqah',0,1,'C');
-        $pdf->Cell(50);
-        $pdf->Cell(0,4,'',0,1,'C');
         $pdf->Cell(50);
         $pdf->Cell(0,5,'Komplek Kayu Tangi II',0,1,'C');
         $pdf->Cell(50);
-        $pdf->Cell(0,4,'',0,1,'C');
-        $pdf->Cell(50);
-        $pdf->SetFont('Times','B','20');
+        $pdf->SetFont('Times','B','10');
         $pdf->Cell(0,5,'Banjarmasin',0,1,'C');
+        $pdf->Cell(50);
+        $pdf->Cell(0,5,'Jl. Brigjen H. Hasan Basri Komplek Kayu Tangi II',0,1,'C');
+        $pdf->Cell(50);
+        $pdf->Cell(0,5,'Telp.(021) 3303074',0,1,'C');
         $pdf->Cell(50);
         $pdf->Cell(0,4,'',0,1,'C');
         $pdf->SetLineWidth(1);		
@@ -210,13 +210,68 @@ public function __construct()
 
         $pdf->SetFont('Arial','',10);
         $user = $this->m_sapras->lists();
-        $no=0;
-        foreach ($user as $data){
-            $no++;
-            $pdf->Cell(10,6,$no,1,0, 'C');
-            $pdf->Cell(80,6,$data->nama_sapras,1,0);
-            $pdf->Cell(100,6,$data->deskripsi_sapras,1,1);
+        $no=1;
+
+        foreach ($user as $key => $value) {
+            $cellWidth=100; //lebar sel
+        	$cellHeight=6; //tinggi sel satu baris normal
+
+            if(strlen($value->deskripsi_sapras) < $cellWidth){
+            //     //jika tidak, maka tidak melakukan apa-apa
+                $line=1;
+            }else{
+
+            //     //jika ya, maka hitung ketinggian yang dibutuhkan untuk sel akan dirapikan
+            //     //dengan memisahkan teks agar sesuai dengan lebar sel
+            //     //lalu hitung berapa banyak baris yang dibutuhkan agar teks pas dengan sel
+		
+                $textLength=strlen($value->deskripsi_sapras);	//total panjang teks
+                $errMargin=5;		//margin kesalahan lebar sel, untuk jaga-jaga
+                $startChar=0;		//posisi awal karakter untuk setiap baris
+                $maxChar=0;			//karakter maksimum dalam satu baris, yang akan ditambahkan nanti
+                $textArray=array();	//untuk menampung data untuk setiap baris
+                $tmpString="";		//untuk menampung teks untuk setiap baris (sementara)
+                
+                while($startChar < $textLength){ //perulangan sampai akhir teks
+                    //perulangan sampai karakter maksimum tercapai
+                    while( 
+                    $pdf->GetStringWidth( $tmpString ) < ($cellWidth-$errMargin) &&
+                    ($startChar+$maxChar) < $textLength ) {
+                        $maxChar++;
+                        $tmpString=substr($value->deskripsi_sapras,$startChar,$maxChar);
+                    }
+                    //pindahkan ke baris berikutnya
+                    $startChar=$startChar+$maxChar;
+
+                    //kemudian tambahkan ke dalam array sehingga kita tahu berapa banyak baris yang dibutuhkan
+                    array_push($textArray,$tmpString);
+                    //reset variabel penampung
+                    $maxChar=0;
+                    $tmpString='';
+                    
+                }
+            //     //dapatkan jumlah baris
+        		$line=count($textArray);
+            }
+
+            //     //tulis selnya
+            $pdf->SetFillColor(255,255,255);
+            $pdf->Cell(10,($line * $cellHeight),$no++,1,0,'C',true); //sesuaikan ketinggian dengan jumlah garis
+            $pdf->Cell(80,($line * $cellHeight),$value->nama_sapras,1,0); //sesuaikan ketinggian dengan jumlah garis
+
+            // //memanfaatkan MultiCell sebagai ganti Cell
+            // //atur posisi xy untuk sel berikutnya menjadi di sebelahnya.
+            // //ingat posisi x dan y sebelum menulis MultiCell
+            $xPos=$pdf->GetX();
+            $yPos=$pdf->GetY();
+            $pdf->MultiCell($cellWidth,$cellHeight,$value->deskripsi_sapras,1,1);
+            
+            // //kembalikan posisi untuk sel berikutnya di samping MultiCell 
+            // //dan offset x dengan lebar MultiCell
+            // $pdf->SetXY($xPos + $cellWidth , $yPos);
+            
         }
+
         $pdf->Output();
     }
 

@@ -132,10 +132,11 @@ class kegiatan extends CI_Controller {
         $pdf->Cell(0,5,'Data Kegiatan',0,1,'C');
         $pdf->Ln(2);
         $pdf->Cell(10,6,'No',1,0,'C');
-        $pdf->Cell(50,6,'Nama Kegiatan',1,0,'C');
-        $pdf->Cell(30,6,'Hari Kegiatan',1,0,'C');
-        $pdf->Cell(50,6,'Tanggal Kegiatan',1,0,'C');
-        $pdf->Cell(50,6,'Lokasi Kegiatan',1,1,'C');
+        $pdf->Cell(40,6,'Nama Kegiatan',1,0,'C');
+        $pdf->Cell(25,6,'Hari Kegiatan',1,0,'C');
+        $pdf->Cell(40,6,'Tanggal Kegiatan',1,0,'C');
+        $pdf->Cell(30,6,'Jam Kegiatan',1,0,'C');
+        $pdf->Cell(45,6,'Lokasi Kegiatan',1,1,'C');
         $pdf->SetFont('Arial','',10);
         $pengurus = $this->M_kegiatan->lists();
         $no=0;
@@ -143,10 +144,11 @@ class kegiatan extends CI_Controller {
             $date = DateTime::createFromFormat('Y-m-d', $data->tgl_kegiatan)->format('d-m-Y');
             $no++;
             $pdf->Cell(10,6,$no,1,0, 'C');
-            $pdf->Cell(50,6,$data->nama_kegiatan,1,0,'C');
-            $pdf->Cell(30,6,$data->hari_kegiatan,1,0, 'C');
-            $pdf->Cell(50,6,$date,1,0,'C');
-            $pdf->Cell(50,6,$data->lokasi_kegiatan,1,1,'C');
+            $pdf->Cell(40,6,$data->nama_kegiatan,1,0,'C');
+            $pdf->Cell(25,6,$data->hari_kegiatan,1,0, 'C');
+            $pdf->Cell(40,6,$date,1,0,'C');
+            $pdf->Cell(30,6,$data->jam_kegiatan,1,0,'C');
+            $pdf->Cell(45,6,$data->lokasi_kegiatan,1,1,'C');
 
         }
         $pdf->Output();

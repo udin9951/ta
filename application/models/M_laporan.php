@@ -6,7 +6,8 @@ class M_laporan extends CI_Model {
 	{
 		$this->db->select('*');
         $this->db->from('laporan');
-		$this->db->order_by('id', 'desc');
+		$this->db->join('user', 'user.id_user = laporan.user', 'left');
+		$this->db->order_by('laporan.id', 'desc');
 		return $this->db->get();
 	}
 

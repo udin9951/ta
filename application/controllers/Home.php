@@ -130,6 +130,7 @@ class Home extends CI_Controller {
 				$anggotaItem['jabatan'] = $a->jabatan_pengurus;
 				$anggotaItem['nama'] = $a->nama_pengurus;
 				$anggotaItem['title'] = $a->title;
+				$anggotaItem['no_urut'] = $a->no_urut;
 
 				array_push($anggota_bidang, $anggotaItem);
 			}

@@ -41,8 +41,11 @@ class rekap extends CI_Controller {
 
     }
 
-    public function cetak($filter = NULL)
+    public function cetak($filter = NULL, $end = NULL, $type = NULL)
     {
+        $filter = $filter == "NULL" ? "" : $filter;
+        $end = $end == "NULL" ? "" : $end;
+        $type = $type == "NULL" ? "" : $type;
         error_reporting(0); // AGAR ERROR MASALAH VERSI PHP TIDAK MUNCUL
         $pdf = new FPDF('P', 'mm','A4');
         $pdf->AddPage();
@@ -75,7 +78,7 @@ class rekap extends CI_Controller {
         $pdf->Cell(30,6,'Penerimaan',1,0,'C');
         $pdf->Cell(30,6,'Pengeluaran',1,1,'C');
         $pdf->SetFont('Arial','',10);
-        $user =$this->M_rekap->lists($filter);
+        $user =$this->M_rekap->lists($filter, $end, $type);
         $no=0;
         $total_masuk = 0;
         $total_keluar = 0;
@@ -116,9 +119,13 @@ class rekap extends CI_Controller {
         $pdf->Output();
     }
 
-	public function export($filter = NULL)
+	public function export($filter = NULL, $end = NULL, $type = NULL)
     {
-		$export = $this->M_rekap->lists($filter);
+        $filter = $filter == "NULL" ? "" : $filter;
+        $end = $end == "NULL" ? "" : $end;
+        $type = $type == "NULL" ? "" : $type;
+
+		$export = $this->M_rekap->lists($filter, $end, $type);
 		$file_path = "Data Rekap Kas.xls";
 		$writer = WriterFactory::create(Type::XLSX);
 		$writer->openToBrowser($file_path);
@@ -216,11 +223,14 @@ class rekap extends CI_Controller {
 		$writer->close(); //tutup spout writer
     }
     
-    public function print($filter = NULL)
+    public function print($filter = NULL, $end = NULL, $type = NULL)
     {
+        $filter = $filter == "NULL" ? "" : $filter;
+        $end = $end == "NULL" ? "" : $end;
+        $type = $type == "NULL" ? "" : $type;
 
         $url = base_url('./icon/logo_.png');
-        $kas = $this->M_rekap->lists($filter);
+        $kas = $this->M_rekap->lists($filter, $end, $type);
         $data = "";
         $no = 1;
         $total_masuk = 0;

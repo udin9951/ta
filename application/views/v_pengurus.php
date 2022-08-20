@@ -104,11 +104,11 @@
                                                     if($anggota[$i]['jabatan'] == $value->jabatan_pengurus){
                                                         if($anggota[$i]['title'] == 1)
                                                         {
-                                                            echo "<b>Ketua</b> : ".$anggota[$i]['nama']."<br>";
+                                                            echo "<b>Ketua</b> : ".$anggota[$i]['no_urut'].". ".$anggota[$i]['nama']."<br>";
                                                         }
                                                         else
                                                         {
-                                                            echo ($i).". ".$anggota[$i]['nama']."<br>";
+                                                            echo $anggota[$i]['no_urut'].". ".$anggota[$i]['nama']."<br>";
                                                         }
                                                     }
                                                 }

@@ -57,21 +57,20 @@
                         <?php 
                         
                         $urlExport = base_url('rekap/export');  
-                        if(!empty($filter))
-                        {
-                            $urlExport = base_url('rekap/export/'.$filter);
-                        }
-        
                         $urlCetak = base_url('rekap/cetak');  
-                        if(!empty($filter))
-                        {
-                            $urlCetak = base_url('rekap/cetak/'.$filter);
-                        }
-                        
                         $urlPrint = base_url('rekap/print');  
-                        if(!empty($filter))
+
+
+                        
+                        if(!empty($filter) || !empty($end) || !empty($type))
                         {
-                            $urlPrint = base_url('rekap/print/'.$filter);
+                            $filter = !empty($filter) ? "/".$filter : "/NULL";
+                            $end = !empty($end) ? "/".$end : "/NULL";
+                            $type = !empty($type) ? "/".$type : "/NULL";
+
+                            $urlExport = base_url('rekap/export'.$filter.''.$end.''.$type);
+                            $urlCetak = base_url('rekap/cetak'.$filter.''.$end.''.$type);
+                            $urlPrint = base_url('rekap/print'.$filter.''.$end.''.$type);
                         }
 
                         echo form_close(); ?>

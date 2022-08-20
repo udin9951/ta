@@ -44,7 +44,7 @@
                                 <td><?= $date ?></td>
                                 <td><?= $value->periode ?></td>
                                 <td> <img src="<?= base_url('gambar/'. $value->foto_laporan) ?>" width="150px"> </td>	
-                                <td><?= $value->user ?></td>
+                                <td><?= $value->nama_user ?></td>
                                 <td>
                                 <a href="<?= base_url('laporan/edit/'.$value->id)?>" class ="btn btn-xs btn-primary"> <i class="fa fa-pencil"> </i></a>
                                 <a href="<?= base_url('laporan/delete/'.$value->id)?>" onclick="return confirm('Apakah Data Ingin Dihapus..?')" class ="btn btn-xs btn-danger"> <i class="fa fa-trash"> </i></a>
